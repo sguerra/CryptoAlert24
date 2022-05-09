@@ -62,5 +62,6 @@ buck-out/
 /vendor/bundle/
 
 # Build
+.env
 ios/
 android/
