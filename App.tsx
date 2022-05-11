@@ -18,7 +18,7 @@ import {
 import {
   Colors
 } from 'react-native/Libraries/NewAppScreen';
-import { CryptoPortfolio } from './src/CryptoPortfolio';
+import { CryptoPortfolio } from './src/views/CryptoPortfolio';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
