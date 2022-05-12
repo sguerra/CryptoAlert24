@@ -8,48 +8,73 @@ import Assets from '../services/assets';
 
 import Config from 'react-native-config'
 
+function filterAssets(assetList: object[], assetFilter: string = ''){
+
+    if(assetFilter === ''){
+        return assetList
+    }
+
+    const normalizedSearchText = assetFilter.toUpperCase()
+    
+    return assetList.filter((asset)=>{
+
+        const normalizedAssetName = asset.name.toUpperCase()
+        const normalizedAssetSymbol = asset.symbol.toUpperCase()
+
+        return normalizedAssetName.indexOf(normalizedSearchText) >= 0 || normalizedAssetSymbol.indexOf(normalizedSearchText) >= 0
+    })
+}
+
 export const CryptoPortfolio: FunctionComponent = ()=>{
 
-    const [jsonResponse, setJsonResponse] = useState(null)
     const [count, setCount] = useState(0)
+    const [page, setPage] = useState(1)
     const [assets, setAssets] = useState([])
+    const [assetFilter, setAssetFilter] = useState('')
 
     const service = useMemo(()=>{
         return new Assets()
     },[])
-
-    useMemo(()=>{
-        if(!jsonResponse) {
-            return
-        }
-        setAssets(jsonResponse)
-    },[jsonResponse])
     
+    const getAllAssets = async (nextPage: number = 1)=>{
+
+        try{
+            const {data} = await service.getAll(nextPage)
+
+            if(nextPage===1){
+                setAssets(data)
+            }else{
+                setAssets(assets.concat(data))
+            }
+
+            setPage(nextPage)
+        }catch(err){
+
+            return null
+        }
+    }
+
+    const filteredAssets =  useMemo(()=>{
+
+        return filterAssets(assets, assetFilter)
+    
+    }, [assets, assetFilter])
+
+    const searchTextHandler = useCallback((searchText: string)=>{
+        setAssetFilter(searchText)
+        
+    }, [setAssetFilter])
+
+    const endOfListReachedHandler = useCallback(()=>{
+        getAllAssets(page+1)
+    }, [getAllAssets, page])
 
     useEffect(()=>{
         setCount(count+1)
-        service.getAll().then((jsonResponse)=>{
-            setJsonResponse(jsonResponse.data)
-        })
-    }, [service])
 
-    const searchTextHandler = useCallback((searchText: string)=>{
-        
-        if(!jsonResponse){
-            return
-        }
-
-        const normalizedSearchText = searchText.toUpperCase()
-        
-        setAssets(jsonResponse.filter((asset)=>{
-
-            const normalizedAssetName = asset.name.toUpperCase()
-            const normalizedAssetSymbol = asset.symbol.toUpperCase()
-    
-
-            return normalizedAssetName.indexOf(normalizedSearchText) >= 0 || normalizedAssetSymbol.indexOf(normalizedSearchText) >= 0
-        }))
-    }, [jsonResponse])
+        setAssets([])
+        getAllAssets()
+    }, [])
 
     const TempDebugSection = ()=>{
         return (
@@ -58,6 +83,7 @@ export const CryptoPortfolio: FunctionComponent = ()=>{
                 <Text>API URI: {Config.API_BASE_URI}</Text>
                 <Text>Render count: {count}</Text>
                 <Text>List lenght: {assets.length}</Text>
+                <Text>List page: {page}</Text>
             </View>
         )
     }
@@ -70,6 +96,7 @@ export const CryptoPortfolio: FunctionComponent = ()=>{
                 placeholderTextColor='white'
                 onChangeText={searchTextHandler}></TextInput>
             <FlatList 
+                onEndReached={endOfListReachedHandler}
                 style={styles.list}
                 renderItem={({item})=>{
 
@@ -99,7 +126,7 @@ export const CryptoPortfolio: FunctionComponent = ()=>{
                         </TouchableOpacity>
                     )
                 }}
-                data={assets}/>
+                data={filteredAssets}/>
             <TempDebugSection/>
         </View>
     )
