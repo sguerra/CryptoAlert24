@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import type { FunctionComponent } from 'react';
 
 import {
@@ -33,6 +33,24 @@ export const CryptoPortfolio: FunctionComponent = ()=>{
         })
     }, [service])
 
+    const searchTextHandler = useCallback((searchText: string)=>{
+        
+        if(!jsonResponse){
+            return
+        }
+
+        const normalizedSearchText = searchText.toUpperCase()
+        
+        setAssets(jsonResponse.filter((asset)=>{
+
+            const normalizedAssetName = asset.name.toUpperCase()
+            const normalizedAssetSymbol = asset.symbol.toUpperCase()
+    
+
+            return normalizedAssetName.indexOf(normalizedSearchText) >= 0 || normalizedAssetSymbol.indexOf(normalizedSearchText) >= 0
+        }))
+    }, [jsonResponse])
+
     const TempDebugSection = ()=>{
         return (
             <View style={{backgroundColor: 'white'}}> 
@@ -46,7 +64,11 @@ export const CryptoPortfolio: FunctionComponent = ()=>{
 
     return (
         <View style={styles.container}>
-            <TextInput style={styles.searchInput} placeholder='Search...' placeholderTextColor='white'></TextInput>
+            <TextInput 
+                style={styles.searchInput} 
+                placeholder='Search...' 
+                placeholderTextColor='white'
+                onChangeText={searchTextHandler}></TextInput>
             <FlatList 
                 style={styles.list}
                 renderItem={({item})=>{
