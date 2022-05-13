@@ -4,12 +4,19 @@ A react-native app to keep track of your favourite crypto coins.
 
 ## Screenshots
 
+### Main
 <center>
+    <img src="./media/portfolio.png"/>
+</center>
 
-<img src="./media/portfolio.png"/>
+### Search
+<center>
+    <img src="./media/portfolio.gif"/>
+</center>
 
-<img src="./media/portfolio.gif"/>
-
+### Detail
+<center>
+    <img src="./media/detail.gif"/>
 </center>
 
 ## Requirements
