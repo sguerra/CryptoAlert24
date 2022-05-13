@@ -14,11 +14,17 @@ import {
   StatusBar,
   useColorScheme,
 } from 'react-native';
-
 import {
   Colors
 } from 'react-native/Libraries/NewAppScreen';
+
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+
 import { CryptoPortfolio } from './src/views/CryptoPortfolio';
+import { CryptoDetails } from './src/views/CrytpoDetails';
+
+const Stack = createNativeStackNavigator()
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -28,10 +34,15 @@ const App = () => {
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <>
       <StatusBar barStyle={'dark-content'} />
-      <CryptoPortfolio/>
-    </SafeAreaView>
+      <NavigationContainer>
+          <Stack.Navigator>
+              <Stack.Screen name="Portfolio" component={CryptoPortfolio}/>
+              <Stack.Screen name="Details" component={CryptoDetails}/>
+          </Stack.Navigator>
+      </NavigationContainer>
+    </>
   );
 };
 

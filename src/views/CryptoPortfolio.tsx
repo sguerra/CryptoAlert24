@@ -25,7 +25,7 @@ function filterAssets(assetList: object[], assetFilter: string = ''){
     })
 }
 
-export const CryptoPortfolio: FunctionComponent = ()=>{
+export const CryptoPortfolio: FunctionComponent = ({ navigation })=>{
 
     const [count, setCount] = useState(0)
     const [page, setPage] = useState(1)
@@ -68,6 +68,10 @@ export const CryptoPortfolio: FunctionComponent = ()=>{
     const endOfListReachedHandler = useCallback(()=>{
         getAllAssets(page+1)
     }, [getAllAssets, page])
+
+    const itemOnPressHandler = useCallback((itemId)=>{
+        navigation.navigate('Details', {id: itemId})
+    },[ navigation ])
 
     useEffect(()=>{
         setCount(count+1)
@@ -113,7 +117,7 @@ export const CryptoPortfolio: FunctionComponent = ()=>{
                     }
 
                     return (
-                        <TouchableOpacity style={styles.item}>
+                        <TouchableOpacity style={styles.item} onPress={()=>{itemOnPressHandler(item.id)}}>
                             <Image source={{uri: imgSourceURI}} style={styles.itemImage}></Image>
                             <View style={styles.itemName}>
                                 <Text style={styles.itemText}>{item.symbol}</Text>
