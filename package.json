@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@react-navigation/native": "^6.0.10",
@@ -41,5 +42,11 @@
   },
   "resolutions": {
     "@types/react": "^17"
-  }
+  },
+  "eslintIgnore": [
+    ".eslintrc.js",
+    "babel.config.js",
+    "index.js",
+    "metro.config.js"
+  ]
 }

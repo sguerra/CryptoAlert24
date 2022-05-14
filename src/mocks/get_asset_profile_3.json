@@ -1,187 +1,187 @@
 {
-    "status": {
-        "elapsed": 1,
-        "timestamp": "2022-05-13T04:32:01.803403864Z"
-    },
-    "data": {
-        "id": "7d793fa7-5fc6-432a-b26b-d1b10769d42e",
-        "serial_id": 91,
-        "symbol": "DOGE",
-        "name": "Dogecoin",
-        "slug": "dogecoin",
-        "contract_addresses": [
+  "status": {
+    "elapsed": 1,
+    "timestamp": "2022-05-13T04:32:01.803403864Z"
+  },
+  "data": {
+    "id": "7d793fa7-5fc6-432a-b26b-d1b10769d42e",
+    "serial_id": 91,
+    "symbol": "DOGE",
+    "name": "Dogecoin",
+    "slug": "dogecoin",
+    "contract_addresses": [
+      {
+        "platform": "binance-smart-chain",
+        "contract_address": "0x4206931337dc273a630d328da6441786bfad668f"
+      }
+    ],
+    "_internal_temp_agora_id": "683e1999-91b6-434f-91a6-4b14e7d9e4b6",
+    "profile": {
+      "general": {
+        "overview": {
+          "is_verified": false,
+          "tagline": "A meme-currency dedicated to Shiba Inus",
+          "category": "Payments",
+          "sector": "Currencies",
+          "tags": null,
+          "project_details": "Dogecoin is a playful cryptocurrency popularized by adopting the Shiba Inu internet meme.",
+          "official_links": [
             {
-                "platform": "binance-smart-chain",
-                "contract_address": "0x4206931337dc273a630d328da6441786bfad668f"
+              "name": "Website",
+              "link": "https://dogecoin.com/"
+            },
+            {
+              "name": "Github",
+              "link": "https://github.com/dogecoin/dogecoin"
+            },
+            {
+              "name": "Twitter",
+              "link": "https://twitter.com/dogecoin"
+            },
+            {
+              "name": "Reddit",
+              "link": "https://www.reddit.com/r/dogecoin/"
+            },
+            {
+              "name": "Telegram",
+              "link": "https://t.me/TheDogeHouse"
+            },
+            {
+              "name": "Block Explorer",
+              "link": "https://dogechain.info/"
             }
-        ],
-        "_internal_temp_agora_id": "683e1999-91b6-434f-91a6-4b14e7d9e4b6",
-        "profile": {
-            "general": {
-                "overview": {
-                    "is_verified": false,
-                    "tagline": "A meme-currency dedicated to Shiba Inus",
-                    "category": "Payments",
-                    "sector": "Currencies",
-                    "tags": null,
-                    "project_details": "Dogecoin is a playful cryptocurrency popularized by adopting the Shiba Inu internet meme.",
-                    "official_links": [
-                        {
-                            "name": "Website",
-                            "link": "https://dogecoin.com/"
-                        },
-                        {
-                            "name": "Github",
-                            "link": "https://github.com/dogecoin/dogecoin"
-                        },
-                        {
-                            "name": "Twitter",
-                            "link": "https://twitter.com/dogecoin"
-                        },
-                        {
-                            "name": "Reddit",
-                            "link": "https://www.reddit.com/r/dogecoin/"
-                        },
-                        {
-                            "name": "Telegram",
-                            "link": "https://t.me/TheDogeHouse"
-                        },
-                        {
-                            "name": "Block Explorer",
-                            "link": "https://dogechain.info/"
-                        }
-                    ]
-                },
-                "background": {
-                    "background_details": "Dogecoin is a meme cryptocurrency with the internet-famous Shiba Inu canine breed as a mascot. The project was introduced on Twitter by Jackson Palmer on November 27, 2013 when he tweeted about \"investing\" on “Dogecoin”, a made-up name. Some of Palmer's friends encouraged him to create a real Dogecoin project, so he registered dogecoin.com and started working. Billy Markus saw the website and reached out to Palmer. Markus and Palmer thought Dogecoin would make the cryptocurrency space more palletable to newcomers since, as they built the protocol, Bitcoin was beleaguered by associations with Silk Road and dark web. Palmer exited the Dogecoin project and community in June 2014 by tweeting, \"Unsubshibing. Peace.\"\n\nUnlike a variety of other altcoins launched in 2013 and 2014, Dogecoin has proved itself surprisingly resilient to crypto-asset market cycles, which is speculated to be the result of meme durability. ",
-                    "issuing_organizations": []
-                },
-                "roadmap": [],
-                "regulation": {
-                    "regulatory_details": null,
-                    "sfar_score": null,
-                    "sfar_summary": null
-                }
-            },
-            "contributors": {
-                "individuals": [
-                    {
-                        "slug": "jackson-palmer",
-                        "first_name": "Jackson",
-                        "last_name": "Palmer",
-                        "title": "Creator of Dogecoin",
-                        "description": "Creator of Dogecoin, Product at Adobe",
-                        "avatar_url": "https://messari.s3.amazonaws.com/images/agora-images/0%3Fe%3D1549497600%26v%3Dbeta%26t%3DYM1dBkuuWwMOuYPSAq83BDWawwPXoCs_0sFfW-ZrSQM"
-                    },
-                    {
-                        "slug": "billy-markus",
-                        "first_name": "Billy",
-                        "last_name": "Markus",
-                        "title": "Creator of Dogecoin",
-                        "description": "Software engineer and creator of original Dogecoin codebase",
-                        "avatar_url": null
-                    }
-                ],
-                "organizations": []
-            },
-            "advisors": {
-                "individuals": [],
-                "organizations": []
-            },
-            "investors": {
-                "individuals": [],
-                "organizations": [
-                    {
-                        "slug": "how-2-ventures-04100610",
-                        "name": "How 2 Ventures",
-                        "logo": "https://messari.s3.amazonaws.com/images/agora-images/0%3Fe%3D1582156800%26v%3Dbeta%26t%3D9odAaWPPsffHE4lPgbB6X5zoPTADeXYvp-hrFQqzJRc",
-                        "description": "A Blockchain Venture Capital, Digital Asset & Cryptocurrency Hedge Fund. How 2 Ventures five-point strategy focuses on several areas of investment within the Blockchain startup, and Digital Asset & Cryptocurrency markets: 1. Emerging Blockchain Technology (pre-ICO & ICO investments). 2. Established Blockchain networks’ digital assets & cryptocurrencies (forks, airdrops, etc.). 3. Emerging Blockchain networks’ digital assets & cryptocurrencies (growth, adoption, etc.). 4. Leverage trading during periods of volatility to increase returns (BTC, ETH vs. alternative coins). 5. Capitalize on swings in the market using alpha theory (-2, -1, 0, 1, 2)"
-                    }
-                ]
-            },
-            "ecosystem": {
-                "assets": [],
-                "organizations": []
-            },
-            "economics": {
-                "token": {
-                    "token_name": "Dogecoin",
-                    "token_type": "Native",
-                    "token_address": null,
-                    "block_explorers": null,
-                    "multitoken": [],
-                    "token_usage": "Payments",
-                    "token_usage_details": null
-                },
-                "launch": {
-                    "general": {
-                        "launch_style": "Fair Launch",
-                        "launch_details": "Dogecoin was launched on December 6, 2013, with no premine or instamine. "
-                    },
-                    "fundraising": {
-                        "sales_rounds": [],
-                        "sales_documents": [],
-                        "sales_treasury_accounts": [],
-                        "treasury_policies": null,
-                        "projected_use_of_sales_proceeds": []
-                    },
-                    "initial_distribution": {
-                        "initial_supply": 0,
-                        "initial_supply_repartition": {
-                            "allocated_to_investors_percentage": null,
-                            "allocated_to_organization_or_founders_percentage": null,
-                            "allocated_to_premined_rewards_or_airdrops_percentage": null
-                        },
-                        "token_distribution_date": null,
-                        "genesis_block_date": "2013-12-06T09:00:00Z"
-                    }
-                },
-                "consensus_and_emission": {
-                    "supply": {
-                        "supply_curve_details": "Dogecoin DOGE tokens are produced by mining blocks, which rewards miners a randomized quantity of coins. The randomization range halved every 100,000 blocks. Palmer originally capped the DOGE token supply at 100 billion DOGE. But in February 2014, the cap was abolished and an unlimited amount of DOGE can be created, shifting the cryptocurrency from a deflationary to an inflationary supply model. The block reward is now fixed at 10,000 DOGE per block, with one block being mined every one minute. ",
-                        "general_emission_type": "Inflationary",
-                        "precise_emission_type": "Fixed Issuance",
-                        "is_capped_supply": false,
-                        "max_supply": null
-                    },
-                    "consensus": {
-                        "consensus_details": null,
-                        "general_consensus_mechanism": "Proof-of-Work",
-                        "precise_consensus_mechanism": null,
-                        "targeted_block_time": 60,
-                        "block_reward": 10000,
-                        "mining_algorithm": "Scrypt",
-                        "next_halving_date": null,
-                        "is_victim_of_51_percent_attack": false
-                    }
-                },
-                "native_treasury": {
-                    "accounts": [],
-                    "treasury_usage_details": null
-                }
-            },
-            "technology": {
-                "overview": {
-                    "technology_details": "Dogecoin is a fairly-launched coin based on the structure of an existing project, Luckycoin, which itself is a code base fork of Litecoin, and arguably enjoys one of the most decentralized peer-to-peer networks after Palmer left the project. New blocks are added to the chain every 60 seconds, on average. \n\nDogecoin uses scrypt hash function for its proof-of-work consensus mechanism. The scrypt algorithm was specifically designed to make it costly to perform large-scale, custom-hardware attacks. At launch, Dogecoin was mine-able on personal computers, which was attractive to cryptocurrency enthusiasts during a time when Bitcoin mining was increasingly industrialized and capital intensive. \n\nDogecoin has no formal white paper, although several fans have written blog and forum posts as stand-in explainer documents. ",
-                    "client_repositories": []
-                },
-                "security": {
-                    "audits": [],
-                    "known_exploits_and_vulnerabilities": []
-                }
-            },
-            "governance": {
-                "governance_details": null,
-                "onchain_governance": {
-                    "onchain_governance_type": "No On-Chain Governance",
-                    "onchain_governance_details": null,
-                    "is_treasury_decentralized": false
-                },
-                "grants": []
-            },
-            "metadata": {
-                "updated_at": "2019-11-12T23:46:55Z"
-            }
+          ]
+        },
+        "background": {
+          "background_details": "Dogecoin is a meme cryptocurrency with the internet-famous Shiba Inu canine breed as a mascot. The project was introduced on Twitter by Jackson Palmer on November 27, 2013 when he tweeted about \"investing\" on “Dogecoin”, a made-up name. Some of Palmer's friends encouraged him to create a real Dogecoin project, so he registered dogecoin.com and started working. Billy Markus saw the website and reached out to Palmer. Markus and Palmer thought Dogecoin would make the cryptocurrency space more palletable to newcomers since, as they built the protocol, Bitcoin was beleaguered by associations with Silk Road and dark web. Palmer exited the Dogecoin project and community in June 2014 by tweeting, \"Unsubshibing. Peace.\"\n\nUnlike a variety of other altcoins launched in 2013 and 2014, Dogecoin has proved itself surprisingly resilient to crypto-asset market cycles, which is speculated to be the result of meme durability. ",
+          "issuing_organizations": []
+        },
+        "roadmap": [],
+        "regulation": {
+          "regulatory_details": null,
+          "sfar_score": null,
+          "sfar_summary": null
         }
+      },
+      "contributors": {
+        "individuals": [
+          {
+            "slug": "jackson-palmer",
+            "first_name": "Jackson",
+            "last_name": "Palmer",
+            "title": "Creator of Dogecoin",
+            "description": "Creator of Dogecoin, Product at Adobe",
+            "avatar_url": "https://messari.s3.amazonaws.com/images/agora-images/0%3Fe%3D1549497600%26v%3Dbeta%26t%3DYM1dBkuuWwMOuYPSAq83BDWawwPXoCs_0sFfW-ZrSQM"
+          },
+          {
+            "slug": "billy-markus",
+            "first_name": "Billy",
+            "last_name": "Markus",
+            "title": "Creator of Dogecoin",
+            "description": "Software engineer and creator of original Dogecoin codebase",
+            "avatar_url": null
+          }
+        ],
+        "organizations": []
+      },
+      "advisors": {
+        "individuals": [],
+        "organizations": []
+      },
+      "investors": {
+        "individuals": [],
+        "organizations": [
+          {
+            "slug": "how-2-ventures-04100610",
+            "name": "How 2 Ventures",
+            "logo": "https://messari.s3.amazonaws.com/images/agora-images/0%3Fe%3D1582156800%26v%3Dbeta%26t%3D9odAaWPPsffHE4lPgbB6X5zoPTADeXYvp-hrFQqzJRc",
+            "description": "A Blockchain Venture Capital, Digital Asset & Cryptocurrency Hedge Fund. How 2 Ventures five-point strategy focuses on several areas of investment within the Blockchain startup, and Digital Asset & Cryptocurrency markets: 1. Emerging Blockchain Technology (pre-ICO & ICO investments). 2. Established Blockchain networks’ digital assets & cryptocurrencies (forks, airdrops, etc.). 3. Emerging Blockchain networks’ digital assets & cryptocurrencies (growth, adoption, etc.). 4. Leverage trading during periods of volatility to increase returns (BTC, ETH vs. alternative coins). 5. Capitalize on swings in the market using alpha theory (-2, -1, 0, 1, 2)"
+          }
+        ]
+      },
+      "ecosystem": {
+        "assets": [],
+        "organizations": []
+      },
+      "economics": {
+        "token": {
+          "token_name": "Dogecoin",
+          "token_type": "Native",
+          "token_address": null,
+          "block_explorers": null,
+          "multitoken": [],
+          "token_usage": "Payments",
+          "token_usage_details": null
+        },
+        "launch": {
+          "general": {
+            "launch_style": "Fair Launch",
+            "launch_details": "Dogecoin was launched on December 6, 2013, with no premine or instamine. "
+          },
+          "fundraising": {
+            "sales_rounds": [],
+            "sales_documents": [],
+            "sales_treasury_accounts": [],
+            "treasury_policies": null,
+            "projected_use_of_sales_proceeds": []
+          },
+          "initial_distribution": {
+            "initial_supply": 0,
+            "initial_supply_repartition": {
+              "allocated_to_investors_percentage": null,
+              "allocated_to_organization_or_founders_percentage": null,
+              "allocated_to_premined_rewards_or_airdrops_percentage": null
+            },
+            "token_distribution_date": null,
+            "genesis_block_date": "2013-12-06T09:00:00Z"
+          }
+        },
+        "consensus_and_emission": {
+          "supply": {
+            "supply_curve_details": "Dogecoin DOGE tokens are produced by mining blocks, which rewards miners a randomized quantity of coins. The randomization range halved every 100,000 blocks. Palmer originally capped the DOGE token supply at 100 billion DOGE. But in February 2014, the cap was abolished and an unlimited amount of DOGE can be created, shifting the cryptocurrency from a deflationary to an inflationary supply model. The block reward is now fixed at 10,000 DOGE per block, with one block being mined every one minute. ",
+            "general_emission_type": "Inflationary",
+            "precise_emission_type": "Fixed Issuance",
+            "is_capped_supply": false,
+            "max_supply": null
+          },
+          "consensus": {
+            "consensus_details": null,
+            "general_consensus_mechanism": "Proof-of-Work",
+            "precise_consensus_mechanism": null,
+            "targeted_block_time": 60,
+            "block_reward": 10000,
+            "mining_algorithm": "Scrypt",
+            "next_halving_date": null,
+            "is_victim_of_51_percent_attack": false
+          }
+        },
+        "native_treasury": {
+          "accounts": [],
+          "treasury_usage_details": null
+        }
+      },
+      "technology": {
+        "overview": {
+          "technology_details": "Dogecoin is a fairly-launched coin based on the structure of an existing project, Luckycoin, which itself is a code base fork of Litecoin, and arguably enjoys one of the most decentralized peer-to-peer networks after Palmer left the project. New blocks are added to the chain every 60 seconds, on average. \n\nDogecoin uses scrypt hash function for its proof-of-work consensus mechanism. The scrypt algorithm was specifically designed to make it costly to perform large-scale, custom-hardware attacks. At launch, Dogecoin was mine-able on personal computers, which was attractive to cryptocurrency enthusiasts during a time when Bitcoin mining was increasingly industrialized and capital intensive. \n\nDogecoin has no formal white paper, although several fans have written blog and forum posts as stand-in explainer documents. ",
+          "client_repositories": []
+        },
+        "security": {
+          "audits": [],
+          "known_exploits_and_vulnerabilities": []
+        }
+      },
+      "governance": {
+        "governance_details": null,
+        "onchain_governance": {
+          "onchain_governance_type": "No On-Chain Governance",
+          "onchain_governance_details": null,
+          "is_treasury_decentralized": false
+        },
+        "grants": []
+      },
+      "metadata": {
+        "updated_at": "2019-11-12T23:46:55Z"
+      }
     }
+  }
 }
