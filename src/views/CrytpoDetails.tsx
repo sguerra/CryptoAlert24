@@ -2,20 +2,26 @@ import React, {useEffect, useState} from 'react'
 import type {FunctionComponent} from 'react'
 import {Image, StyleSheet, Text, View} from 'react-native'
 import Assets from '../services/assets'
-import Config from 'react-native-config'
 
-type CryptoAssetProps = {
-  asset: object
+import type {CryptoAsset} from '../services/types'
+import {Debug} from './Debug'
+import Utils from '../components/utils'
+
+type CryptoDetailsHeaderProps = {
+  asset: CryptoAsset
 }
 
-const CryptoAsset: FunctionComponent<CryptoAssetProps> = ({asset}) => {
-  const imgSourceURI = `${Config.API_IMG_URI}/${asset.id}/128.png?v=2`
-
+const CryptoDetailsHeader: FunctionComponent<CryptoDetailsHeaderProps> = ({
+  asset,
+}) => {
   return (
     <>
       <View style={Styles.header}>
         <View>
-          <Image style={Styles.detailImage} source={{uri: imgSourceURI}} />
+          <Image
+            style={Styles.detailImage}
+            source={{uri: Utils.getImageSourceURI(asset.id, '128')}}
+          />
         </View>
         <View style={Styles.detailSummary}>
           <Text style={{...Styles.detailText, ...Styles.detailTitle}}>
@@ -33,20 +39,6 @@ const CryptoAsset: FunctionComponent<CryptoAssetProps> = ({asset}) => {
   )
 }
 
-type TempDebugSectionProps = {
-  assetId: string
-}
-
-const TempDebugSection: FunctionComponent<TempDebugSectionProps> = ({
-  assetId,
-}) => {
-  return (
-    <View style={Styles.tempDebug}>
-      <Text>Asset ID: {assetId}</Text>
-    </View>
-  )
-}
-
 export const CryptoDetails: FunctionComponent = ({route}) => {
   const assetId = route.params.id
   const [asset, setAsset] = useState(null)
@@ -59,8 +51,10 @@ export const CryptoDetails: FunctionComponent = ({route}) => {
 
   return (
     <View style={Styles.container}>
-      {asset && <CryptoAsset asset={asset} />}
-      <TempDebugSection assetId={assetId} />
+      {asset && <CryptoDetailsHeader asset={asset} />}
+      <Debug>
+        <Text>Asset ID: {assetId}</Text>
+      </Debug>
     </View>
   )
 }
@@ -103,5 +97,4 @@ const Styles = StyleSheet.create({
     fontSize: 16,
     color: '#AAA',
   },
-  tempDebug: {height: 25, backgroundColor: 'white'},
 })

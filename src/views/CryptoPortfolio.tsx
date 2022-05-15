@@ -1,12 +1,13 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react'
 import type {FunctionComponent} from 'react'
 
-import {View, TextInput, Text, StyleSheet} from 'react-native'
+import {View, Text, StyleSheet} from 'react-native'
 import Assets from '../services/assets'
 
-import Config from 'react-native-config'
 import {CryptoList} from '../components/CryptoList'
 import type {CryptoAsset} from '../services/types'
+import {Debug} from './Debug'
+import {CryptoSearchInput} from '../components/CryptoSearchInput'
 
 function filterAssets(assetList: CryptoAsset[], assetFilter: string = '') {
   if (assetFilter === '') {
@@ -84,32 +85,19 @@ export const CryptoPortfolio: FunctionComponent = ({navigation}) => {
     getAllAssets()
   }, [])
 
-  const TempDebugSection = () => {
-    return (
-      <View style={styles.tempDebug}>
-        <Text>App Mode: {Config.APP_MODE}</Text>
-        <Text>API URI: {Config.API_BASE_URI}</Text>
-        <Text>Render count: {count}</Text>
-        <Text>List lenght: {assets.length}</Text>
-        <Text>List page: {page}</Text>
-      </View>
-    )
-  }
-
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.searchInput}
-        placeholder="Search..."
-        placeholderTextColor="white"
-        onChangeText={searchTextHandler}
-      />
+      <CryptoSearchInput onChangeText={searchTextHandler} />
       <CryptoList
         onEndReached={endOfListReachedHandler}
         onItemPressed={itemOnPressHandler}
         assets={filteredAssets}
       />
-      <TempDebugSection />
+      <Debug>
+        <Text>Render count: {count}</Text>
+        <Text>List lenght: {assets.length}</Text>
+        <Text>List page: {page}</Text>
+      </Debug>
     </View>
   )
 }
@@ -129,5 +117,4 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
   },
-  tempDebug: {backgroundColor: 'white'},
 })
