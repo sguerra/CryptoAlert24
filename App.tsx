@@ -16,12 +16,14 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack'
 
 import {CryptoPortfolio} from './src/views/CryptoPortfolio'
 import {CryptoDetails} from './src/views/CrytpoDetails'
+import {Provider} from 'react-redux'
+import {globalStore} from './src/reducers/globalStore'
 
 const Stack = createNativeStackNavigator()
 
 const App = () => {
   return (
-    <>
+    <Provider store={globalStore}>
       <StatusBar barStyle={'dark-content'} />
       <NavigationContainer>
         <Stack.Navigator>
@@ -29,7 +31,7 @@ const App = () => {
           <Stack.Screen name="Details" component={CryptoDetails} />
         </Stack.Navigator>
       </NavigationContainer>
-    </>
+    </Provider>
   )
 }
 

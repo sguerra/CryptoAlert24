@@ -1,13 +1,15 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react'
 import type {FunctionComponent} from 'react'
-
 import {View, Text, StyleSheet} from 'react-native'
-import Assets from '../services/assets'
+import type {AnyAction} from 'redux'
 
 import {CryptoList} from '../components/CryptoList'
 import type {CryptoAsset} from '../services/types'
 import {Debug} from './Debug'
 import {CryptoSearchInput} from '../components/CryptoSearchInput'
+import {useDispatch, useSelector} from 'react-redux'
+import {selectAllAssets, selectPage} from '../reducers/globalReducer'
+import {getAllAssetsAsync} from '../actions'
 
 function filterAssets(assetList: CryptoAsset[], assetFilter: string = '') {
   if (assetFilter === '') {
@@ -29,32 +31,11 @@ function filterAssets(assetList: CryptoAsset[], assetFilter: string = '') {
 
 export const CryptoPortfolio: FunctionComponent = ({navigation}) => {
   const [count, setCount] = useState(0)
-  const [page, setPage] = useState(1)
-  const [assets, setAssets] = useState<CryptoAsset[]>([])
   const [assetFilter, setAssetFilter] = useState('')
 
-  const service = useMemo(() => {
-    return new Assets()
-  }, [])
-
-  const getAllAssets = useCallback(
-    async (nextPage: number = 1) => {
-      try {
-        const {data} = await service.getAll(nextPage)
-
-        if (nextPage === 1) {
-          setAssets(data)
-        } else {
-          setAssets(assets.concat(data))
-        }
-
-        setPage(nextPage)
-      } catch (err) {
-        return null
-      }
-    },
-    [assets, service],
-  )
+  const globalDispatch = useDispatch()
+  const assets = useSelector(selectAllAssets)
+  const page = useSelector(selectPage)
 
   const filteredAssets = useMemo(() => {
     return filterAssets(assets, assetFilter)
@@ -68,8 +49,8 @@ export const CryptoPortfolio: FunctionComponent = ({navigation}) => {
   )
 
   const endOfListReachedHandler = useCallback(() => {
-    getAllAssets(page + 1)
-  }, [getAllAssets, page])
+    globalDispatch(getAllAssetsAsync(page + 1) as unknown as AnyAction)
+  }, [globalDispatch, page])
 
   const itemOnPressHandler = useCallback(
     (itemId: string) => {
@@ -80,10 +61,8 @@ export const CryptoPortfolio: FunctionComponent = ({navigation}) => {
 
   useEffect(() => {
     setCount(count + 1)
-
-    setAssets([])
-    getAllAssets()
-  }, [])
+    globalDispatch(getAllAssetsAsync() as unknown as AnyAction)
+  }, [globalDispatch])
 
   return (
     <View style={styles.container}>
