@@ -1,11 +1,14 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import type {FunctionComponent} from 'react'
 import {Image, StyleSheet, Text, View} from 'react-native'
-import Assets from '../services/assets'
 
 import type {CryptoAsset} from '../services/types'
 import {Debug} from './Debug'
 import Utils from '../components/utils'
+import {useDispatch, useSelector} from 'react-redux'
+import {selectAsset} from '../reducers/globalReducer'
+import {getAssetDetailAsync} from '../actions'
+import {AnyAction} from 'redux'
 
 type CryptoDetailsHeaderProps = {
   asset: CryptoAsset
@@ -41,13 +44,12 @@ const CryptoDetailsHeader: FunctionComponent<CryptoDetailsHeaderProps> = ({
 
 export const CryptoDetails: FunctionComponent = ({route}) => {
   const assetId = route.params.id
-  const [asset, setAsset] = useState(null)
+  const asset = useSelector(selectAsset)
+  const globalDispatch = useDispatch()
 
   useEffect(() => {
-    new Assets().getProfile(assetId).then(jsonResponse => {
-      setAsset(jsonResponse.data)
-    })
-  }, [assetId])
+    globalDispatch(getAssetDetailAsync(assetId) as unknown as AnyAction)
+  }, [globalDispatch, assetId])
 
   return (
     <View style={Styles.container}>

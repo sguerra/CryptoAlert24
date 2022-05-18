@@ -109,3 +109,11 @@ export type CryptoAsset = CryptoCommon & {
   profile: CryptoAssetProfile
   metrics: CryptoAssetMetrics
 }
+
+export type CryptoAssetResponse = {
+  data: CryptoAsset
+}
+
+export type CryptoAssetCollectionResponse = {
+  data: CryptoAsset[]
+}
