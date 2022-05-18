@@ -36,7 +36,19 @@ type CryptoAssetOHLVC = {
   volume: number
 }
 
-type CryptoAssetMarketData = {
+export type CryptoAssetMarketcap = {
+  rank: number
+  marketcap_dominance_percent: number
+  current_marketcap_usd: number
+  y_2050_marketcap_usd: number
+  y_plus10_marketcap_usd: number
+  liquid_marketcap_usd: number
+  volume_turnover_last_24_hours_percent: number
+  realized_marketcap_usd: number
+  outstanding_marketcap_usd: number
+}
+
+export type CryptoAssetMarketData = {
   price_usd: number
   price_btc: number
   volume_last_24_hours: number
@@ -57,17 +69,7 @@ type CryptoCommon = {
 
 export type CryptoAssetMetrics = CryptoCommon & {
   market_data: CryptoAssetMarketData
-  marketcap: {
-    rank: number
-    marketcap_dominance_percent: number
-    current_marketcap_usd: number
-    y_2050_marketcap_usd: number
-    y_plus10_marketcap_usd: number
-    liquid_marketcap_usd: number
-    volume_turnover_last_24_hours_percent: number
-    realized_marketcap_usd: number
-    outstanding_marketcap_usd: number
-  }
+  marketcap: CryptoAssetMarketcap
   supply: {
     y_2050: number
     y_2050_percent_issued: number
@@ -112,6 +114,9 @@ export type CryptoAsset = CryptoCommon & {
 
 export type CryptoAssetResponse = {
   data: CryptoAsset
+}
+export type CryptoAssetMetricsResponse = {
+  data: CryptoAssetMetrics
 }
 
 export type CryptoAssetCollectionResponse = {

@@ -10,14 +10,29 @@ const percentFormatter = Intl.NumberFormat('es-US', {
   minimumFractionDigits: 1,
 })
 
+const MILLION = 1000000
+const BILLION = MILLION * 1000
+const TRILLION = BILLION * 1000
+
+const formatPriceDef = (price: number) => {
+  const formattedPrice = priceFormatter.format(price)
+  return formattedPrice
+}
+
 export default {
   getImageSourceURI: (assetId: string, imageSize: string) => {
     const imgSourceURI = `${Config.API_IMG_URI}/${assetId}/${imageSize}.png?v=2`
     return imgSourceURI
   },
-  formatPrice: (price: number) => {
-    const formattedPrice = priceFormatter.format(price)
-    return formattedPrice
+  formatPrice: formatPriceDef,
+  formatLargePrice: (price: number) => {
+    if (price > TRILLION) {
+      return `${formatPriceDef(price / TRILLION)}T`
+    } else if (price > BILLION) {
+      return `${formatPriceDef(price / BILLION)}B`
+    } else if (price > MILLION) {
+      return `${formatPriceDef(price / MILLION)}M`
+    }
   },
   formatPercent: (percent: number) => {
     let formattedPercent = percent >= 0 ? '+' : ''

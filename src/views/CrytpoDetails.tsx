@@ -9,6 +9,9 @@ import {useDispatch, useSelector} from 'react-redux'
 import {selectAsset} from '../reducers/globalReducer'
 import {getAssetDetailAsync} from '../actions'
 import {AnyAction} from 'redux'
+import {CryptoPriceDelta} from '../components/CryptoPriceDelta'
+import {CryptoPrice} from '../components/CryptoPrice'
+import {useMarketcap} from '../components/hooks/useMarketcap'
 
 type CryptoDetailsHeaderProps = {
   asset: CryptoAsset
@@ -17,26 +20,39 @@ type CryptoDetailsHeaderProps = {
 const CryptoDetailsHeader: FunctionComponent<CryptoDetailsHeaderProps> = ({
   asset,
 }) => {
+  if (!asset) {
+    return null
+  }
+
+  const {rank, current_marketcap_usd} = useMarketcap(asset)
+
   return (
     <>
-      <View style={Styles.header}>
+      <View style={styles.header}>
         <View>
           <Image
-            style={Styles.detailImage}
+            style={styles.detailImage}
             source={{uri: Utils.getImageSourceURI(asset.id, '128')}}
           />
         </View>
-        <View style={Styles.detailSummary}>
-          <Text style={{...Styles.detailText, ...Styles.detailTitle}}>
+        <View style={styles.detailSummary}>
+          <Text style={{...styles.detailText, ...styles.detailTitle}}>
             {asset.symbol}
           </Text>
-          <Text style={{...Styles.detailText, ...Styles.detailSubtitle}}>
-            {asset.name}
+          <Text style={{...styles.detailText, ...styles.detailSubtitle}}>
+            {rank}: {asset.name}
+          </Text>
+          <Text style={styles.detailSubtitle}>
+            Mkt. {Utils.formatLargePrice(current_marketcap_usd)}
           </Text>
         </View>
+        <View style={styles.detailPrice}>
+          <CryptoPrice asset={asset} />
+          <CryptoPriceDelta asset={asset} />
+        </View>
       </View>
-      <View style={Styles.detail}>
-        <Text style={{...Styles.detailText, ...Styles.detailTitle}}>Chart</Text>
+      <View style={styles.detail}>
+        <Text style={{...styles.detailText, ...styles.detailTitle}}>Chart</Text>
       </View>
     </>
   )
@@ -52,7 +68,7 @@ export const CryptoDetails: FunctionComponent = ({route}) => {
   }, [globalDispatch, assetId])
 
   return (
-    <View style={Styles.container}>
+    <View style={styles.container}>
       {asset && <CryptoDetailsHeader asset={asset} />}
       <Debug>
         <Text>Asset ID: {assetId}</Text>
@@ -61,7 +77,7 @@ export const CryptoDetails: FunctionComponent = ({route}) => {
   )
 }
 
-const Styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'column',
@@ -70,7 +86,7 @@ const Styles = StyleSheet.create({
   },
   header: {
     color: 'white',
-    height: 100,
+    height: 120,
     backgroundColor: '#333',
     display: 'flex',
     flexDirection: 'row',
@@ -88,6 +104,10 @@ const Styles = StyleSheet.create({
     flexDirection: 'column',
     textAlign: 'center',
     margin: 20,
+  },
+  detailPrice: {
+    display: 'flex',
+    padding: 7.5,
   },
   detailText: {
     color: 'white',

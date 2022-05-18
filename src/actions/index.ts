@@ -32,11 +32,17 @@ export type getAssetDetailProps = {
 export const getAssetDetailAsync = (assetId: string) => {
   return async (dispatch: Dispatch) => {
     try {
-      const {data} = await assetsService.getProfile(assetId)
+      const {data: assetProfile} = await assetsService.getProfile(assetId)
+      const {data: metrics} = await assetsService.getMetrics(assetId)
+
+      const asset = {
+        ...assetProfile,
+        metrics: metrics,
+      } as CryptoAsset
 
       dispatch(
         getAssetDetail({
-          asset: data as CryptoAsset,
+          asset: asset,
         } as getAssetDetailProps),
       )
     } catch (err) {}

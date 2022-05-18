@@ -3,6 +3,8 @@ import type {FunctionComponent} from 'react'
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {CryptoAsset} from '../services/types'
 import Utils from './utils'
+import {CryptoPriceDelta} from './CryptoPriceDelta'
+import {CryptoPrice} from './CryptoPrice'
 
 type CryptoListItemProps = {
   asset: CryptoAsset
@@ -13,16 +15,6 @@ export const CryptoListItem: FunctionComponent<CryptoListItemProps> = ({
   asset,
   onItemPressed,
 }) => {
-  const {market_data} = asset.metrics
-  const {price_usd, percent_change_usd_last_24_hours} = market_data
-
-  const deltaStyle = {
-    ...styles.itemDelta,
-    ...(percent_change_usd_last_24_hours >= 0
-      ? styles.itemDeltaInc
-      : styles.itemDeltaDec),
-  }
-
   return (
     <TouchableOpacity
       style={styles.item}
@@ -39,14 +31,8 @@ export const CryptoListItem: FunctionComponent<CryptoListItemProps> = ({
           {asset.metrics.marketcap.rank}: {asset.name}
         </Text>
       </View>
-      <Text style={{...styles.itemText, ...styles.itemPrice}}>
-        {Utils.formatPrice(price_usd)}
-      </Text>
-      <View style={deltaStyle}>
-        <Text style={{...styles.itemText, ...styles.itemPercent}}>
-          {Utils.formatPercent(percent_change_usd_last_24_hours)}
-        </Text>
-      </View>
+      <CryptoPrice asset={asset} />
+      <CryptoPriceDelta asset={asset} />
     </TouchableOpacity>
   )
 }
@@ -75,34 +61,9 @@ const styles = StyleSheet.create({
     color: '#ddd',
     fontSize: 12,
   },
-  itemPrice: {
-    textAlign: 'right',
-    fontSize: 18,
-    fontWeight: 'bold',
-    margin: 12,
-  },
   itemImage: {
     height: 28,
     width: 28,
     margin: 7,
-  },
-  itemDelta: {
-    borderRadius: 10,
-    flexGrow: 0,
-    minWidth: 80,
-    margin: 8,
-    textAlign: 'center',
-  },
-  itemDeltaInc: {
-    backgroundColor: '#36c252',
-  },
-  itemDeltaDec: {
-    backgroundColor: '#e04638',
-  },
-  itemPercent: {
-    textAlign: 'center',
-    fontSize: 16,
-    fontWeight: 'bold',
-    margin: 5,
   },
 })
