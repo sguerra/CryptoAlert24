@@ -107,9 +107,46 @@ export type CryptoAssetMetrics = CryptoCommon & {
   }
 }
 
+type CryptoAssetPriceTimeseries = CryptoCommon & {
+  serial_id: number
+  parameters: {
+    asset_key: string
+    asset_id: string
+    start: string
+    end: string
+    interval: string
+    order: string
+    format: string
+    timestamp_format: string
+    columns: string[]
+  }
+  schema: {
+    metric_id: string
+    name: string
+    description: string
+    values_schema: {
+      timestamp: string
+      open: string
+      high: string
+      low: string
+      close: string
+      volume: string
+    }
+    minimum_interval: string
+    source_attribution: [
+      {
+        name: string
+        url: string
+      },
+    ]
+  }
+  values: number[][]
+}
+
 export type CryptoAsset = CryptoCommon & {
   profile: CryptoAssetProfile
   metrics: CryptoAssetMetrics
+  prices?: CryptoAssetPriceTimeseries
 }
 
 export type CryptoAssetResponse = {
@@ -117,6 +154,10 @@ export type CryptoAssetResponse = {
 }
 export type CryptoAssetMetricsResponse = {
   data: CryptoAssetMetrics
+}
+
+export type CryptoAssetPriceTimeseriesResponse = {
+  data: CryptoAssetPriceTimeseries
 }
 
 export type CryptoAssetCollectionResponse = {

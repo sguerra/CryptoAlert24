@@ -34,10 +34,12 @@ export const getAssetDetailAsync = (assetId: string) => {
     try {
       const {data: assetProfile} = await assetsService.getProfile(assetId)
       const {data: metrics} = await assetsService.getMetrics(assetId)
+      const {data: prices} = await assetsService.getPriceHistory(assetId)
 
       const asset = {
         ...assetProfile,
         metrics: metrics,
+        prices: prices,
       } as CryptoAsset
 
       dispatch(

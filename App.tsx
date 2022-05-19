@@ -15,7 +15,7 @@ import {NavigationContainer} from '@react-navigation/native'
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 
 import {CryptoPortfolio} from './src/views/CryptoPortfolio'
-import {CryptoDetails} from './src/views/CrytpoDetails'
+import {CryptoDetails} from './src/views/CryptoDetails'
 import {Provider} from 'react-redux'
 import {globalStore} from './src/reducers/globalStore'
 

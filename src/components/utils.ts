@@ -32,6 +32,8 @@ export default {
       return `${formatPriceDef(price / BILLION)}B`
     } else if (price > MILLION) {
       return `${formatPriceDef(price / MILLION)}M`
+    } else {
+      return formatPriceDef(price)
     }
   },
   formatPercent: (percent: number) => {

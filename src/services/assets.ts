@@ -9,6 +9,7 @@ import get_price_history from '../mocks/get_price_history.json'
 import type {
   CryptoAssetCollectionResponse,
   CryptoAssetMetricsResponse,
+  CryptoAssetPriceTimeseriesResponse,
   CryptoAssetResponse,
 } from './types'
 
@@ -33,7 +34,7 @@ export default class Assets {
     } else if (Config.APP_MODE === 'prod') {
       try {
         const response = await fetch(
-          `${Config.API_BASE_URI}/assets?limit=100&page=${page}`,
+          `${Config.API_BASE_URI}/v2/assets?limit=100&page=${page}`,
         )
         return response.json()
       } catch (err) {
@@ -82,9 +83,13 @@ export default class Assets {
     }
   }
 
-  async getPriceHistory(id: string): Promise<object> {
+  async getPriceHistory(
+    id: string,
+  ): Promise<CryptoAssetPriceTimeseriesResponse> {
     if (Config.APP_MODE === 'dev') {
-      return Promise.resolve(get_price_history)
+      return Promise.resolve(
+        get_price_history as unknown as CryptoAssetPriceTimeseriesResponse,
+      )
     } else if (Config.APP_MODE === 'prod') {
       try {
         const response = await fetch(
