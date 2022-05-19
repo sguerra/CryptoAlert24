@@ -34,7 +34,7 @@ export default class Assets {
     } else if (Config.APP_MODE === 'prod') {
       try {
         const response = await fetch(
-          `${Config.API_BASE_URI}/v2/assets?limit=100&page=${page}`,
+          `${Config.API_BASE_URI}/v2/assets?limit=50&page=${page}`,
         )
         return response.json()
       } catch (err) {
