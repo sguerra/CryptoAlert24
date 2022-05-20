@@ -1,7 +1,5 @@
 import Config from 'react-native-config'
-import get_all_assets_page_1 from '../mocks/get_all_assets_page_1.json'
-import get_all_assets_page_2 from '../mocks/get_all_assets_page_2.json'
-import get_all_assets_page_3 from '../mocks/get_all_assets_page_3.json'
+import get_all_assets_pages from '../mocks/get_all_assets_pages.json'
 import get_all_assets_not_found from '../mocks/get_all_assets_not_found.json'
 import get_asset_profile from '../mocks/get_asset_profile.json'
 import get_asset_metrics from '../mocks/get_asset_metrics.json'
@@ -18,12 +16,13 @@ export default class Assets {
     if (Config.APP_MODE === 'dev') {
       let assetsPageMock = null
 
-      if (page === 1) {
-        assetsPageMock = get_all_assets_page_1
-      } else if (page === 2) {
-        assetsPageMock = get_all_assets_page_2
-      } else if (page === 3) {
-        assetsPageMock = get_all_assets_page_3
+      if (page <= 3) {
+        assetsPageMock = get_all_assets_pages
+        assetsPageMock.data = assetsPageMock.data.filter((asset, index) => {
+          const isAssetInCurrentPage =
+            index >= (page - 1) * 20 && index < page * 20
+          return asset && isAssetInCurrentPage
+        })
       } else {
         return Promise.reject(get_all_assets_not_found)
       }

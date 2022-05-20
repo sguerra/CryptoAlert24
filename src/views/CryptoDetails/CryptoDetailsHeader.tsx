@@ -15,10 +15,6 @@ type CryptoDetailsHeaderProps = {
 export const CryptoDetailsHeader: FunctionComponent<
   CryptoDetailsHeaderProps
 > = ({asset}) => {
-  if (!asset) {
-    return null
-  }
-
   const {rank, current_marketcap_usd} = useMarketcap(asset)
 
   return (

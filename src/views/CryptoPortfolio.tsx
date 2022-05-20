@@ -10,6 +10,7 @@ import {CryptoSearchInput} from '../components/CryptoSearchInput'
 import {useDispatch, useSelector} from 'react-redux'
 import {selectAllAssets, selectPage} from '../reducers/globalReducer'
 import {getAllAssetsAsync} from '../actions'
+import {CryptoLoading} from '../components/CryptoLoading'
 
 function filterAssets(assetList: CryptoAsset[], assetFilter: string = '') {
   if (assetFilter === '') {
@@ -67,6 +68,9 @@ export const CryptoPortfolio: FunctionComponent = ({navigation}) => {
   return (
     <View style={styles.container}>
       <CryptoSearchInput onChangeText={searchTextHandler} />
+
+      {assets?.length === 0 && <CryptoLoading />}
+
       <CryptoList
         onEndReached={endOfListReachedHandler}
         onItemPressed={itemOnPressHandler}
@@ -74,7 +78,7 @@ export const CryptoPortfolio: FunctionComponent = ({navigation}) => {
       />
       <Debug>
         <Text>Render count: {count}</Text>
-        <Text>List lenght: {assets.length}</Text>
+        <Text>List lenght: {assets?.length}</Text>
         <Text>List page: {page}</Text>
       </Debug>
     </View>

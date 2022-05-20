@@ -9,6 +9,7 @@ import {getAssetDetailAsync} from '../../actions'
 import {AnyAction} from 'redux'
 import {CryptoDetailsHeader} from './CryptoDetailsHeader'
 import {CryptoDetailsChart} from './CryptoDetailsChart'
+import {CryptoLoading} from '../../components/CryptoLoading'
 
 export const CryptoDetails: FunctionComponent = ({route}) => {
   const assetId = route.params.id
@@ -19,14 +20,15 @@ export const CryptoDetails: FunctionComponent = ({route}) => {
     globalDispatch(getAssetDetailAsync(assetId) as unknown as AnyAction)
   }, [globalDispatch, assetId])
 
-  if (!asset) {
-    return null
-  }
-
   return (
     <View style={styles.container}>
-      <CryptoDetailsHeader asset={asset} />
-      <CryptoDetailsChart asset={asset} />
+      {asset && asset?.id === assetId && (
+        <>
+          <CryptoDetailsHeader asset={asset} />
+          <CryptoDetailsChart asset={asset} />
+        </>
+      )}
+      {asset?.id !== assetId && <CryptoLoading />}
       <Debug>
         <Text>Asset ID: {assetId}</Text>
       </Debug>
