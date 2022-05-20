@@ -2,7 +2,8 @@ import React, {useMemo} from 'react'
 import type {FunctionComponent} from 'react'
 import {ScrollView, StyleSheet, Text, View} from 'react-native'
 
-import {LineChart} from 'react-native-svg-charts'
+import {AreaChart, Grid} from 'react-native-svg-charts'
+import RenderHtml from 'react-native-render-html'
 
 import type {CryptoAsset} from '../../services/types'
 import {PriceDeltaColors} from '../../constants'
@@ -39,11 +40,18 @@ export const CryptoDetailsChart: FunctionComponent<CryptoDetailsChartProps> = ({
     return {
       stroke: strokeColor,
       strokeWidth: 2,
+      fill: strokeColor,
+      fillOpacity: 0.25,
     }
   }, [strokeColor])
 
-  const chartOHLVTextStyle = {...styles.chartText, ...styles.chartOHLVText}
-  const chartOHLVValueStyle = {
+  const gridSvg = {
+    stroke: '#333',
+    strokeWidth: 1,
+  }
+
+  const chartDetailsTextStyle = {...styles.chartText, ...styles.chartOHLVText}
+  const chartDetailsValueStyle = {
     ...styles.chartText,
     ...styles.chartValue,
     ...styles.chartOHLVText,
@@ -54,33 +62,47 @@ export const CryptoDetailsChart: FunctionComponent<CryptoDetailsChartProps> = ({
       <View style={styles.chartInterval}>
         <Text style={{...styles.chartText, ...styles.chartValue}}>1hr</Text>
       </View>
-      <LineChart
-        style={styles.chartLineChart}
+      <AreaChart
+        style={styles.chartAreaChart}
         data={chartValues}
         keys={chartDates}
         svg={chartSvg}
-        contentInset={{top: 20, bottom: 20}}
-      />
+        contentInset={{top: 20, bottom: 20}}>
+        <Grid svg={gridSvg} />
+      </AreaChart>
       <View style={styles.chartOHLV}>
-        <Text style={chartOHLVTextStyle}>
+        <Text style={chartDetailsTextStyle}>
           Open:{' '}
-          <Text style={chartOHLVValueStyle}>{utils.formatPrice(open)}</Text>
+          <Text style={chartDetailsValueStyle}>{utils.formatPrice(open)}</Text>
         </Text>
-        <Text style={chartOHLVTextStyle}>
+        <Text style={chartDetailsTextStyle}>
           Close:{' '}
-          <Text style={chartOHLVValueStyle}>{utils.formatPrice(close)}</Text>
+          <Text style={chartDetailsValueStyle}>{utils.formatPrice(close)}</Text>
         </Text>
-        <Text style={chartOHLVTextStyle}>
+        <Text style={chartDetailsTextStyle}>
           High:{' '}
-          <Text style={chartOHLVValueStyle}>{utils.formatPrice(high)}</Text>
+          <Text style={chartDetailsValueStyle}>{utils.formatPrice(high)}</Text>
         </Text>
-        <Text style={chartOHLVTextStyle}>
-          Low: <Text style={chartOHLVValueStyle}>{utils.formatPrice(low)}</Text>
+        <Text style={chartDetailsTextStyle}>
+          Low:{' '}
+          <Text style={chartDetailsValueStyle}>{utils.formatPrice(low)}</Text>
         </Text>
-        <Text style={chartOHLVTextStyle}>
+        <Text style={chartDetailsTextStyle}>
           Volume:{' '}
-          <Text style={chartOHLVValueStyle}>{utils.formatPrice(volume)}</Text>
+          <Text style={chartDetailsValueStyle}>
+            {utils.formatPrice(volume)}
+          </Text>
         </Text>
+      </View>
+      <View style={styles.chartProfile}>
+        <Text style={chartDetailsValueStyle}>
+          {asset.profile.general.overview.tagline}
+        </Text>
+        <RenderHtml
+          contentWidth={0}
+          baseStyle={chartDetailsTextStyle}
+          source={{html: asset.profile.general.overview.project_details}}
+        />
       </View>
     </ScrollView>
   )
@@ -91,10 +113,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.75)',
     flexGrow: 1,
   },
-  chartLineChart: {
-    width: '100%',
+  chartAreaChart: {
+    width: '101%',
     minHeight: 200,
     flexGrow: 1,
+    margin: -1,
   },
   chartInterval: {
     margin: 5,
@@ -126,5 +149,11 @@ const styles = StyleSheet.create({
   chartOHLVText: {
     flexWrap: 'wrap',
     flexGrow: 6,
+  },
+  chartProfile: {
+    backgroundColor: '#333',
+    borderRadius: 10,
+    margin: 10,
+    padding: 10,
   },
 })

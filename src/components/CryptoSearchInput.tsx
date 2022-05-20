@@ -21,10 +21,12 @@ export const CryptoSearchInput: FunctionComponent<CryptoSearchInputProps> = ({
 
 const styles = StyleSheet.create({
   searchInput: {
-    height: 50,
-    marginTop: 5,
+    height: 45,
+    margin: 10,
     backgroundColor: '#666',
     color: 'white',
     fontSize: 18,
+    borderRadius: 10,
+    padding: 10,
   },
 })

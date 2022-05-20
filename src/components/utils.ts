@@ -42,4 +42,11 @@ export default {
 
     return formattedPercent
   },
+  getLast24HrsDate: () => {
+    var currentDate = new Date()
+    var millisecsDate = Number(currentDate)
+    millisecsDate -= 1000 * 60 * 60 * 24 // Substract last 24hrs
+
+    return new Date(millisecsDate)
+  },
 }

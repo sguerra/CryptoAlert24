@@ -10,6 +10,7 @@ import type {
   CryptoAssetPriceTimeseriesResponse,
   CryptoAssetResponse,
 } from './types'
+import Utils from '../components/utils'
 
 export default class Assets {
   async getAll(page: number = 1): Promise<CryptoAssetCollectionResponse> {
@@ -91,8 +92,9 @@ export default class Assets {
       )
     } else if (Config.APP_MODE === 'prod') {
       try {
+        const start = Utils.getLast24HrsDate().toISOString()
         const response = await fetch(
-          `${Config.API_BASE_URI}/v1/assets/${id}/metrics/price/time-series`,
+          `${Config.API_BASE_URI}/v1/assets/${id}/metrics/price/time-series?start=${start}`,
         )
         return response.json()
       } catch (err) {

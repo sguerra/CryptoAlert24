@@ -31,5 +31,7 @@ export const CryptoList: FunctionComponent<CryptoListProps> = ({
 }
 
 const styles = StyleSheet.create({
-  list: {},
+  list: {
+    margin: 5,
+  },
 })
