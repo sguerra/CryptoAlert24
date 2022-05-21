@@ -38,8 +38,9 @@ const styles = StyleSheet.create({
   priceDelta: {
     borderRadius: 10,
     flexGrow: 0,
-    minWidth: 80,
+    minWidth: 65,
     margin: 8,
+    marginRight: 0,
     textAlign: 'center',
   },
   priceDeltaInc: {
@@ -51,8 +52,8 @@ const styles = StyleSheet.create({
   priceDeltaPercent: {
     color: 'white',
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: 13,
     fontWeight: 'bold',
-    margin: 5,
+    margin: 8,
   },
 })

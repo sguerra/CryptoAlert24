@@ -5,6 +5,7 @@ import {CryptoAsset} from '../services/types'
 import Utils from './utils'
 import {CryptoPriceDelta} from './CryptoPriceDelta'
 import {CryptoPrice} from './CryptoPrice'
+import {CryptoSubscribeButton} from './CryptoSubscribeButton'
 
 type CryptoListItemProps = {
   asset: CryptoAsset
@@ -27,12 +28,13 @@ export const CryptoListItem: FunctionComponent<CryptoListItemProps> = ({
       />
       <View style={styles.itemName}>
         <Text style={styles.itemText}>{asset.symbol}</Text>
-        <Text style={styles.itemSubtitle}>
+        <Text style={styles.itemSubtitle} numberOfLines={1}>
           {asset.metrics.marketcap.rank}: {asset.name}
         </Text>
       </View>
       <CryptoPrice asset={asset} />
       <CryptoPriceDelta asset={asset} />
+      <CryptoSubscribeButton onClick={() => {}} isSelected={false} />
     </TouchableOpacity>
   )
 }
@@ -51,19 +53,24 @@ const styles = StyleSheet.create({
   },
   itemName: {
     flexGrow: 1,
+    margin: 6,
+    marginRight: 0,
   },
   itemText: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 15,
     fontWeight: 'bold',
   },
   itemSubtitle: {
     color: '#ddd',
-    fontSize: 12,
+    fontSize: 11,
+    maxWidth: '80%',
   },
   itemImage: {
-    height: 28,
-    width: 28,
-    margin: 7,
+    height: 24,
+    width: 24,
+    margin: 10,
+    marginRight: 2,
+    marginLeft: 5,
   },
 })

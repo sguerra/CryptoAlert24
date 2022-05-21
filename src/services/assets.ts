@@ -12,6 +12,24 @@ import type {
 } from './types'
 import Utils from '../components/utils'
 
+/**
+ * API call wrapper
+ * @param uri - URI starting with: /<something>
+ */
+async function makeAPIRequest(uri: string) {
+  let options = {}
+
+  if (Config.API_KEY) {
+    options = {
+      headers: {
+        'x-messari-api-key': Config.API_KEY,
+      },
+    }
+  }
+
+  return fetch(`${Config.API_BASE_URI}${uri}`, options)
+}
+
 export default class Assets {
   async getAll(page: number = 1): Promise<CryptoAssetCollectionResponse> {
     if (Config.APP_MODE === 'dev') {
@@ -33,8 +51,8 @@ export default class Assets {
       )
     } else if (Config.APP_MODE === 'prod') {
       try {
-        const response = await fetch(
-          `${Config.API_BASE_URI}/v2/assets?limit=50&page=${page}`,
+        const response = await makeAPIRequest(
+          `/v2/assets?limit=50&page=${page}`,
         )
         return response.json()
       } catch (err) {
@@ -52,9 +70,7 @@ export default class Assets {
       )
     } else if (Config.APP_MODE === 'prod') {
       try {
-        const response = await fetch(
-          `${Config.API_BASE_URI}/v2/assets/${id}/profile`,
-        )
+        const response = await makeAPIRequest(`/v2/assets/${id}/profile`)
         return response.json()
       } catch (err) {
         return Promise.reject(err)
@@ -71,9 +87,7 @@ export default class Assets {
       )
     } else if (Config.APP_MODE === 'prod') {
       try {
-        const response = await fetch(
-          `${Config.API_BASE_URI}/v1/assets/${id}/metrics`,
-        )
+        const response = await makeAPIRequest(`/v1/assets/${id}/metrics`)
         return response.json()
       } catch (err) {
         return Promise.reject(err)
@@ -93,8 +107,8 @@ export default class Assets {
     } else if (Config.APP_MODE === 'prod') {
       try {
         const start = Utils.getLast24HrsDate().toISOString()
-        const response = await fetch(
-          `${Config.API_BASE_URI}/v1/assets/${id}/metrics/price/time-series?start=${start}`,
+        const response = await makeAPIRequest(
+          `/v1/assets/${id}/metrics/price/time-series?start=${start}`,
         )
         return response.json()
       } catch (err) {

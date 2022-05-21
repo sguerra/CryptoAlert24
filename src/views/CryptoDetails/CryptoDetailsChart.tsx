@@ -23,7 +23,7 @@ export const CryptoDetailsChart: FunctionComponent<CryptoDetailsChartProps> = ({
   }
 
   const {values} = prices
-  const {market_data} = metrics
+  const {market_data, marketcap} = metrics
 
   const chartValues = values.map(value => value[1])
   const chartDates = values.map(value => value[0])
@@ -35,6 +35,7 @@ export const CryptoDetailsChart: FunctionComponent<CryptoDetailsChartProps> = ({
 
   const {ohlcv_last_24_hour} = market_data
   const {open, high, low, close, volume} = ohlcv_last_24_hour
+  const {current_marketcap_usd} = marketcap
 
   const chartSvg = useMemo(() => {
     return {
@@ -60,7 +61,9 @@ export const CryptoDetailsChart: FunctionComponent<CryptoDetailsChartProps> = ({
   return (
     <ScrollView style={styles.chart}>
       <View style={styles.chartInterval}>
-        <Text style={{...styles.chartText, ...styles.chartValue}}>1hr</Text>
+        <Text style={{...styles.chartText, ...styles.chartValue}}>
+          Last 24 hrs
+        </Text>
       </View>
       <AreaChart
         style={styles.chartAreaChart}
@@ -93,6 +96,12 @@ export const CryptoDetailsChart: FunctionComponent<CryptoDetailsChartProps> = ({
             {utils.formatPrice(volume)}
           </Text>
         </Text>
+        <Text style={chartDetailsTextStyle}>
+          Mkt Cap:{' '}
+          <Text style={chartDetailsValueStyle}>
+            {utils.formatLargePrice(current_marketcap_usd)}
+          </Text>
+        </Text>
       </View>
       <View style={styles.chartProfile}>
         <Text style={chartDetailsValueStyle}>
@@ -122,14 +131,14 @@ const styles = StyleSheet.create({
   chartInterval: {
     margin: 5,
     backgroundColor: '#333',
-    maxWidth: 50,
+    maxWidth: 100,
     borderRadius: 5,
     alignItems: 'center',
   },
   chartText: {
     margin: 5,
     color: '#AAA',
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: 'bold',
   },
   chartValue: {

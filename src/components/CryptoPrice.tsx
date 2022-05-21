@@ -24,8 +24,10 @@ const styles = StyleSheet.create({
   priceText: {
     color: 'white',
     textAlign: 'right',
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
     margin: 12,
+    marginLeft: 0,
+    flexGrow: 1,
   },
 })

@@ -7,6 +7,7 @@ import {useMarketcap} from '../../components/hooks/useMarketcap'
 import type {CryptoAsset} from '../../services/types'
 import {Image, StyleSheet, Text, View} from 'react-native'
 import Utils from '../../components/utils'
+import {CryptoSubscribeButton} from '../../components/CryptoSubscribeButton'
 
 type CryptoDetailsHeaderProps = {
   asset: CryptoAsset
@@ -15,7 +16,7 @@ type CryptoDetailsHeaderProps = {
 export const CryptoDetailsHeader: FunctionComponent<
   CryptoDetailsHeaderProps
 > = ({asset}) => {
-  const {rank, current_marketcap_usd} = useMarketcap(asset)
+  const {rank} = useMarketcap(asset)
 
   return (
     <>
@@ -30,16 +31,20 @@ export const CryptoDetailsHeader: FunctionComponent<
           <Text style={{...styles.headerText, ...styles.headerTitle}}>
             {asset.symbol}
           </Text>
-          <Text style={{...styles.headerText, ...styles.headerSubtitle}}>
+          <Text
+            style={{...styles.headerText, ...styles.headerSubtitle}}
+            numberOfLines={1}>
             {rank}: {asset.name}
-          </Text>
-          <Text style={styles.headerSubtitle}>
-            Mkt. {Utils.formatLargePrice(current_marketcap_usd)}
           </Text>
         </View>
         <View style={styles.detailPrice}>
           <CryptoPrice asset={asset} />
+        </View>
+        <View style={styles.detailPrice}>
           <CryptoPriceDelta asset={asset} />
+        </View>
+        <View style={styles.detailSubscribe}>
+          <CryptoSubscribeButton onClick={() => {}} isSelected={true} />
         </View>
       </View>
     </>
@@ -49,34 +54,49 @@ export const CryptoDetailsHeader: FunctionComponent<
 const styles = StyleSheet.create({
   header: {
     color: 'white',
-    height: 120,
+    height: 80,
     backgroundColor: '#333',
     display: 'flex',
     flexDirection: 'row',
   },
   headerImage: {
-    width: 64,
-    height: 64,
-    margin: 12,
+    width: 36,
+    height: 36,
+    margin: 24,
+    marginLeft: 5,
+    marginRight: 10,
+    flexGrow: 0,
   },
   detailSummary: {
     display: 'flex',
     flexDirection: 'column',
     textAlign: 'center',
-    margin: 20,
+    flexGrow: 1,
+    alignSelf: 'center',
   },
   detailPrice: {
     display: 'flex',
-    padding: 7.5,
+    margin: 5,
+    marginRight: 0,
+    flexGrow: 0,
+    flexDirection: 'column',
+    alignSelf: 'center',
   },
   headerText: {
     color: 'white',
+    marginRight: 0,
   },
   headerTitle: {
-    fontSize: 24,
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   headerSubtitle: {
-    fontSize: 16,
+    fontSize: 12,
+    maxWidth: '80%',
     color: '#AAA',
+  },
+  detailSubscribe: {
+    alignSelf: 'center',
+    flexGrow: 0,
   },
 })
