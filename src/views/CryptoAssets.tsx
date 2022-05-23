@@ -19,6 +19,7 @@ import {
   removeWatchingAssetAsync,
 } from '../actions'
 import {CryptoLoading} from '../components/CryptoLoading'
+import {CryptoFilter, CryptoFilterEnum} from '../components/CryptoFilter'
 
 function filterAssets(assetList: CryptoAsset[], assetFilter: string = '') {
   if (assetFilter === '') {
@@ -41,6 +42,7 @@ function filterAssets(assetList: CryptoAsset[], assetFilter: string = '') {
 export const CryptoAssets: FunctionComponent = ({navigation}) => {
   const [count, setCount] = useState(0)
   const [assetFilter, setAssetFilter] = useState('')
+  const [selectedFilter, setSelectedFilter] = useState(CryptoFilterEnum.All)
 
   const globalDispatch = useDispatch()
   const assets = useSelector(selectAllAssets)
@@ -48,8 +50,16 @@ export const CryptoAssets: FunctionComponent = ({navigation}) => {
   const watchingAssets = useSelector(selectWatchingAssets)
 
   const filteredAssets = useMemo(() => {
-    return filterAssets(assets, assetFilter)
-  }, [assets, assetFilter])
+    const allFilteredAssets = filterAssets(assets, assetFilter)
+
+    if (selectedFilter === CryptoFilterEnum.Watching) {
+      return allFilteredAssets.filter(asset => {
+        return watchingAssets.has(asset.id)
+      })
+    }
+
+    return allFilteredAssets
+  }, [assets, assetFilter, selectedFilter, watchingAssets])
 
   const searchTextHandler = useCallback(
     (searchText: string) => {
@@ -59,8 +69,10 @@ export const CryptoAssets: FunctionComponent = ({navigation}) => {
   )
 
   const endOfListReachedHandler = useCallback(() => {
-    globalDispatch(getAllAssetsAsync(page + 1) as unknown as AnyAction)
-  }, [globalDispatch, page])
+    if (selectedFilter === CryptoFilterEnum.All) {
+      globalDispatch(getAllAssetsAsync(page + 1) as unknown as AnyAction)
+    }
+  }, [globalDispatch, page, selectedFilter])
 
   const itemOnPressHandler = useCallback(
     (itemId: string) => {
@@ -69,12 +81,23 @@ export const CryptoAssets: FunctionComponent = ({navigation}) => {
     [navigation],
   )
 
+  const onFilterSelectionChangeHandler = useCallback(
+    (selectedFilterChanged: CryptoFilterEnum) => {
+      setSelectedFilter(selectedFilterChanged)
+    },
+    [setSelectedFilter],
+  )
+
   const itemActionOnAddHandler = useCallback(
     (assetId: string) => {
       globalDispatch(addWatchingAssetAsync(assetId))
     },
     [globalDispatch],
   )
+
+  const areAllAssetsLoaded = useMemo(() => {
+    return assets?.length > 0
+  }, [assets?.length])
 
   const itemActionOnRemoveHandler = useCallback(
     (assetId: string) => {
@@ -92,16 +115,23 @@ export const CryptoAssets: FunctionComponent = ({navigation}) => {
     <View style={styles.container}>
       <CryptoSearchInput onChangeText={searchTextHandler} />
 
-      {assets?.length === 0 && <CryptoLoading />}
-
-      <CryptoList
-        onEndReached={endOfListReachedHandler}
-        onItemPressed={itemOnPressHandler}
-        onAddActionPressed={itemActionOnAddHandler}
-        onRemoveActionPressed={itemActionOnRemoveHandler}
-        assets={filteredAssets}
-        selectedAssets={watchingAssets}
-      />
+      {!areAllAssetsLoaded && <CryptoLoading />}
+      {areAllAssetsLoaded && (
+        <>
+          <CryptoFilter
+            selectedFilter={selectedFilter}
+            onSelectionChange={onFilterSelectionChangeHandler}
+          />
+          <CryptoList
+            onEndReached={endOfListReachedHandler}
+            onItemPressed={itemOnPressHandler}
+            onAddActionPressed={itemActionOnAddHandler}
+            onRemoveActionPressed={itemActionOnRemoveHandler}
+            assets={filteredAssets}
+            selectedAssets={watchingAssets}
+          />
+        </>
+      )}
       <Debug>
         <Text>Render count: {count}</Text>
         <Text>List lenght: {assets?.length}</Text>
