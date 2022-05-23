@@ -2,7 +2,12 @@ import type {Dispatch} from 'redux'
 
 import Assets from '../services/assets'
 import type {CryptoAsset} from '../services/types'
-import {getAllAssets, getAssetDetail} from '../reducers/globalReducer'
+import {
+  getAllAssets,
+  getAssetDetail,
+  addWatchingAsset,
+  removeWatchingAsset,
+} from '../reducers/globalReducer'
 
 const assetsService = new Assets()
 
@@ -48,5 +53,29 @@ export const getAssetDetailAsync = (assetId: string) => {
         } as getAssetDetailProps),
       )
     } catch (err) {}
+  }
+}
+
+export type setWatchingAssetProps = {
+  assetId: string
+}
+
+export const addWatchingAssetAsync = (assetId: string) => {
+  return async (dispatch: Dispatch) => {
+    dispatch(
+      addWatchingAsset({
+        assetId: assetId,
+      } as setWatchingAssetProps),
+    )
+  }
+}
+
+export const removeWatchingAssetAsync = (assetId: string) => {
+  return async (dispatch: Dispatch) => {
+    dispatch(
+      removeWatchingAsset({
+        assetId: assetId,
+      } as setWatchingAssetProps),
+    )
   }
 }

@@ -8,8 +8,16 @@ import type {CryptoAsset} from '../services/types'
 import {Debug} from './Debug'
 import {CryptoSearchInput} from '../components/CryptoSearchInput'
 import {useDispatch, useSelector} from 'react-redux'
-import {selectAllAssets, selectPage} from '../reducers/globalReducer'
-import {getAllAssetsAsync} from '../actions'
+import {
+  selectAllAssets,
+  selectPage,
+  selectWatchingAssets,
+} from '../reducers/globalReducer'
+import {
+  addWatchingAssetAsync,
+  getAllAssetsAsync,
+  removeWatchingAssetAsync,
+} from '../actions'
 import {CryptoLoading} from '../components/CryptoLoading'
 
 function filterAssets(assetList: CryptoAsset[], assetFilter: string = '') {
@@ -30,13 +38,14 @@ function filterAssets(assetList: CryptoAsset[], assetFilter: string = '') {
   })
 }
 
-export const CryptoPortfolio: FunctionComponent = ({navigation}) => {
+export const CryptoAssets: FunctionComponent = ({navigation}) => {
   const [count, setCount] = useState(0)
   const [assetFilter, setAssetFilter] = useState('')
 
   const globalDispatch = useDispatch()
   const assets = useSelector(selectAllAssets)
   const page = useSelector(selectPage)
+  const watchingAssets = useSelector(selectWatchingAssets)
 
   const filteredAssets = useMemo(() => {
     return filterAssets(assets, assetFilter)
@@ -60,6 +69,20 @@ export const CryptoPortfolio: FunctionComponent = ({navigation}) => {
     [navigation],
   )
 
+  const itemActionOnAddHandler = useCallback(
+    (assetId: string) => {
+      globalDispatch(addWatchingAssetAsync(assetId))
+    },
+    [globalDispatch],
+  )
+
+  const itemActionOnRemoveHandler = useCallback(
+    (assetId: string) => {
+      globalDispatch(removeWatchingAssetAsync(assetId))
+    },
+    [globalDispatch],
+  )
+
   useEffect(() => {
     setCount(count + 1)
     globalDispatch(getAllAssetsAsync() as unknown as AnyAction)
@@ -74,7 +97,10 @@ export const CryptoPortfolio: FunctionComponent = ({navigation}) => {
       <CryptoList
         onEndReached={endOfListReachedHandler}
         onItemPressed={itemOnPressHandler}
+        onAddActionPressed={itemActionOnAddHandler}
+        onRemoveActionPressed={itemActionOnRemoveHandler}
         assets={filteredAssets}
+        selectedAssets={watchingAssets}
       />
       <Debug>
         <Text>Render count: {count}</Text>

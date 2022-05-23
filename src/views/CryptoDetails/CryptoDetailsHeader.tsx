@@ -11,11 +11,13 @@ import {CryptoSubscribeButton} from '../../components/CryptoSubscribeButton'
 
 type CryptoDetailsHeaderProps = {
   asset: CryptoAsset
+  isSelected: boolean
+  onActionPressed: (assetId: string) => void
 }
 
 export const CryptoDetailsHeader: FunctionComponent<
   CryptoDetailsHeaderProps
-> = ({asset}) => {
+> = ({asset, isSelected, onActionPressed}) => {
   const {rank} = useMarketcap(asset)
 
   return (
@@ -44,7 +46,12 @@ export const CryptoDetailsHeader: FunctionComponent<
           <CryptoPriceDelta asset={asset} />
         </View>
         <View style={styles.detailSubscribe}>
-          <CryptoSubscribeButton onClick={() => {}} isSelected={true} />
+          <CryptoSubscribeButton
+            onPress={() => {
+              onActionPressed(asset.id)
+            }}
+            isSelected={isSelected}
+          />
         </View>
       </View>
     </>

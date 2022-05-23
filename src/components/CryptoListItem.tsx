@@ -9,12 +9,16 @@ import {CryptoSubscribeButton} from './CryptoSubscribeButton'
 
 type CryptoListItemProps = {
   asset: CryptoAsset
+  isSelected: boolean
   onItemPressed: (id: string) => void
+  onItemActionPressed: (id: string) => void
 }
 
 export const CryptoListItem: FunctionComponent<CryptoListItemProps> = ({
   asset,
+  isSelected,
   onItemPressed,
+  onItemActionPressed,
 }) => {
   return (
     <TouchableOpacity
@@ -34,7 +38,12 @@ export const CryptoListItem: FunctionComponent<CryptoListItemProps> = ({
       </View>
       <CryptoPrice asset={asset} />
       <CryptoPriceDelta asset={asset} />
-      <CryptoSubscribeButton onClick={() => {}} isSelected={false} />
+      <CryptoSubscribeButton
+        onPress={() => {
+          onItemActionPressed(asset.id)
+        }}
+        isSelected={isSelected}
+      />
     </TouchableOpacity>
   )
 }

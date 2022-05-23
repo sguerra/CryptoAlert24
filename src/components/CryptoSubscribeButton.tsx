@@ -3,19 +3,19 @@ import type {FunctionComponent} from 'react'
 import {View, TouchableOpacity, StyleSheet, Text} from 'react-native'
 
 type CryptoSubscribeButtonProps = {
-  onClick: () => void
+  onPress: () => void
   isSelected: boolean
 }
 
 export const CryptoSubscribeButton: FunctionComponent<
   CryptoSubscribeButtonProps
-> = ({onClick, isSelected}) => {
+> = ({onPress, isSelected}) => {
   const buttonTitle = isSelected ? '-' : '+'
   const buttonStyle = isSelected ? styles.selected : styles.unselected
 
   return (
     <View style={{...styles.container, ...buttonStyle}}>
-      <TouchableOpacity onClick={onClick}>
+      <TouchableOpacity onPress={onPress}>
         <Text style={styles.buttonText}>{buttonTitle}</Text>
       </TouchableOpacity>
     </View>

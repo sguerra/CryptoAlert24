@@ -1,11 +1,15 @@
-import React, {useEffect} from 'react'
+import React, {useCallback, useEffect, useMemo} from 'react'
 import type {FunctionComponent} from 'react'
 import {StyleSheet, Text, View} from 'react-native'
 
 import {Debug} from '../Debug'
 import {useDispatch, useSelector} from 'react-redux'
-import {selectAsset} from '../../reducers/globalReducer'
-import {getAssetDetailAsync} from '../../actions'
+import {selectAsset, selectWatchingAssets} from '../../reducers/globalReducer'
+import {
+  addWatchingAssetAsync,
+  getAssetDetailAsync,
+  removeWatchingAssetAsync,
+} from '../../actions'
 import {AnyAction} from 'redux'
 import {CryptoDetailsHeader} from './CryptoDetailsHeader'
 import {CryptoDetailsChart} from './CryptoDetailsChart'
@@ -14,7 +18,24 @@ import {CryptoLoading} from '../../components/CryptoLoading'
 export const CryptoDetails: FunctionComponent = ({route}) => {
   const assetId = route.params.id
   const asset = useSelector(selectAsset)
+  const watchingAssets = useSelector(selectWatchingAssets)
+
   const globalDispatch = useDispatch()
+
+  const isAssetSelected = useMemo(() => {
+    return watchingAssets.has(assetId)
+  }, [watchingAssets, assetId])
+
+  const onActionPressedHandler = useCallback(
+    (pressedAssetId: string) => {
+      if (isAssetSelected) {
+        globalDispatch(removeWatchingAssetAsync(pressedAssetId))
+      } else {
+        globalDispatch(addWatchingAssetAsync(pressedAssetId))
+      }
+    },
+    [isAssetSelected, globalDispatch],
+  )
 
   useEffect(() => {
     globalDispatch(getAssetDetailAsync(assetId) as unknown as AnyAction)
@@ -24,7 +45,11 @@ export const CryptoDetails: FunctionComponent = ({route}) => {
     <View style={styles.container}>
       {asset && asset?.id === assetId && (
         <>
-          <CryptoDetailsHeader asset={asset} />
+          <CryptoDetailsHeader
+            asset={asset}
+            isSelected={isAssetSelected}
+            onActionPressed={onActionPressedHandler}
+          />
           <CryptoDetailsChart asset={asset} />
         </>
       )}

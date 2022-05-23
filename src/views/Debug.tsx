@@ -8,6 +8,9 @@ type DebugProps = {
 }
 
 export const Debug: FunctionComponent<DebugProps> = ({children}) => {
+  if (Config.APP_MODE === 'prod') {
+    return null
+  }
   return (
     <View style={styles.container}>
       <Text>App Mode: {Config.APP_MODE}</Text>

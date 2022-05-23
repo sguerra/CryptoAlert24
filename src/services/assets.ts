@@ -36,7 +36,7 @@ export default class Assets {
       let assetsPageMock = null
 
       if (page <= 3) {
-        assetsPageMock = get_all_assets_pages
+        assetsPageMock = {...get_all_assets_pages}
         assetsPageMock.data = assetsPageMock.data.filter((asset, index) => {
           const isAssetInCurrentPage =
             index >= (page - 1) * 20 && index < page * 20

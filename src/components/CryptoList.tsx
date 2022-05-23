@@ -6,25 +6,40 @@ import {CryptoListItem} from './CryptoListItem'
 
 type CryptoListProps = {
   assets: CryptoAsset[]
+  selectedAssets: Map<string, string>
   onItemPressed: (id: string) => void
+  onAddActionPressed: (id: string) => void
+  onRemoveActionPressed: (id: string) => void
   onEndReached: () => void
 }
 
 export const CryptoList: FunctionComponent<CryptoListProps> = ({
   assets,
+  selectedAssets,
   onItemPressed,
+  onAddActionPressed,
+  onRemoveActionPressed,
   onEndReached,
 }) => {
   return (
     <FlatList
       onEndReached={onEndReached}
       style={styles.list}
-      renderItem={({item}) => (
-        <CryptoListItem
-          asset={item as CryptoAsset}
-          onItemPressed={onItemPressed}
-        />
-      )}
+      renderItem={({item}) => {
+        const isSelected = selectedAssets.has(item.id)
+        const onItemActionPressed = isSelected
+          ? onRemoveActionPressed
+          : onAddActionPressed
+
+        return (
+          <CryptoListItem
+            asset={item as CryptoAsset}
+            onItemPressed={onItemPressed}
+            onItemActionPressed={onItemActionPressed}
+            isSelected={isSelected}
+          />
+        )
+      }}
       data={assets}
     />
   )
