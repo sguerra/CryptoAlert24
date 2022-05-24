@@ -68,9 +68,9 @@ export const CryptoDetailsChart: FunctionComponent<CryptoDetailsChartProps> = ({
       <AreaChart
         style={styles.chartAreaChart}
         data={chartValues}
-        keys={chartDates}
+        start={0}
         svg={chartSvg}
-        contentInset={{top: 20, bottom: 20}}>
+        numberOfTicks={5}>
         <Grid svg={gridSvg} />
       </AreaChart>
       <View style={styles.chartOHLV}>
