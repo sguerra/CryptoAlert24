@@ -63,5 +63,4 @@ buck-out/
 
 # Build
 .env
-ios/
 android/
