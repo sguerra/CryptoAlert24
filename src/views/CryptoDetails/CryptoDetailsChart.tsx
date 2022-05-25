@@ -34,7 +34,13 @@ export const CryptoDetailsChart: FunctionComponent<CryptoDetailsChartProps> = ({
       : PriceDeltaColors.DEC
 
   const {ohlcv_last_24_hour} = market_data
-  const {open, high, low, close, volume} = ohlcv_last_24_hour
+  const {open, high, low, close, volume} = ohlcv_last_24_hour || {
+    open: 0,
+    high: 0,
+    low: 0,
+    close: 0,
+    volume: 0,
+  }
   const {current_marketcap_usd} = marketcap
 
   const chartSvg = useMemo(() => {

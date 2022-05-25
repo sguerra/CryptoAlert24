@@ -30,11 +30,11 @@ function filterAssets(assetList: CryptoAsset[], assetFilter: string = '') {
 
   return assetList.filter(asset => {
     const normalizedAssetName = asset.name.toUpperCase()
-    const normalizedAssetSymbol = asset.symbol.toUpperCase()
+    const normalizedAssetSymbol = asset.symbol?.toUpperCase()
 
     return (
       normalizedAssetName.indexOf(normalizedSearchText) >= 0 ||
-      normalizedAssetSymbol.indexOf(normalizedSearchText) >= 0
+      normalizedAssetSymbol?.indexOf(normalizedSearchText) >= 0
     )
   })
 }

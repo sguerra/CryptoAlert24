@@ -1,7 +1,7 @@
 import type {Dispatch} from 'redux'
 
 import Assets from '../services/assets'
-import type {CryptoAsset, CryptoAssetMarketData} from '../services/types'
+import type {CryptoAsset} from '../services/types'
 import {
   getAllAssets,
   getAssetDetail,
@@ -21,10 +21,19 @@ export type getAllAssetsProps = {
 export const getAllAssetsAsync = (nextPage: number = 1) => {
   return async (dispatch: Dispatch) => {
     try {
-      const {data} = await assetsService.getAll(nextPage)
+      const pagesArray = Array.from(new Array(nextPage).keys())
+
+      const responses = await Promise.all(
+        pagesArray.map(index => assetsService.getAll(index + 1)),
+      )
+
+      const assets = responses
+        .map(({data}) => data)
+        .reduce((prev, current) => prev.concat(current), [])
+
       dispatch(
         getAllAssets({
-          assets: data as CryptoAsset[],
+          assets: assets,
           page: nextPage,
         } as getAllAssetsProps),
       )

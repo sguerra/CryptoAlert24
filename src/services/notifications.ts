@@ -14,7 +14,7 @@ let notificationPermissions: NotificationPermissionsType = {
   sound: false,
 }
 
-PushNotificationIOS.checkPermissions(permissions => {
+PushNotificationIOS.requestPermissions().then(permissions => {
   notificationPermissions = {
     alert: permissions.alert || false,
     badge: permissions.badge || false,
@@ -40,7 +40,7 @@ export const Notifications = {
   pushNotification: async (notification: NotificationType) => {
     const isEmulator = await DeviceInfo.isEmulator()
 
-    if (isEmulator) {
+    if (isEmulator || !notificationPermissions.alert) {
       pushEmulatorNotification(notification)
     } else {
       pushDeviceNotification(notification)

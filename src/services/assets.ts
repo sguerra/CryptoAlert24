@@ -52,7 +52,7 @@ export default class Assets {
     } else if (Config.APP_MODE === 'prod') {
       try {
         const response = await makeAPIRequest(
-          `/v2/assets?limit=50&page=${page}`,
+          `/v2/assets?limit=500&page=${page}`,
         )
         return response.json()
       } catch (err) {

@@ -28,13 +28,7 @@ const getAllAssetsDef: CaseReducer<
   PayloadAction<getAllAssetsProps>
 > = (state, {payload}) => {
   const {assets, page} = payload as getAllAssetsProps
-
-  if (page === 1) {
-    state.assets = assets
-  } else {
-    state.assets = state.assets.concat(assets)
-  }
-
+  state.assets = assets
   state.page = page
 }
 
