@@ -97,6 +97,27 @@ export default class Assets {
     }
   }
 
+  async getLast24HrsPercentChange(
+    id: string,
+  ): Promise<CryptoAssetMetricsResponse> {
+    if (Config.APP_MODE === 'dev') {
+      return Promise.resolve(
+        get_asset_metrics as unknown as CryptoAssetMetricsResponse,
+      )
+    } else if (Config.APP_MODE === 'prod') {
+      try {
+        const response = await makeAPIRequest(
+          `/v1/assets/${id}/metrics?fields=symbol,market_data/percent_change_usd_last_24_hours`,
+        )
+        return response.json()
+      } catch (err) {
+        return Promise.reject(err)
+      }
+    } else {
+      throw new Error('Invalid Metrics Percent Change')
+    }
+  }
+
   async getPriceHistory(
     id: string,
   ): Promise<CryptoAssetPriceTimeseriesResponse> {

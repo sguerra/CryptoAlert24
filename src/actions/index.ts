@@ -1,13 +1,15 @@
 import type {Dispatch} from 'redux'
 
 import Assets from '../services/assets'
-import type {CryptoAsset} from '../services/types'
+import type {CryptoAsset, CryptoAssetMarketData} from '../services/types'
 import {
   getAllAssets,
   getAssetDetail,
   addWatchingAsset,
   removeWatchingAsset,
+  setAlerts,
 } from '../reducers/globalReducer'
+import utils from '../components/utils'
 
 const assetsService = new Assets()
 
@@ -77,5 +79,42 @@ export const removeWatchingAssetAsync = (assetId: string) => {
         assetId: assetId,
       } as setWatchingAssetProps),
     )
+  }
+}
+
+export type getAlertsProps = {
+  alerts: string[]
+}
+
+export const getAlertsAsync = (assetIds: string[]) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      const responses = await Promise.all(
+        assetIds.map(assetId =>
+          assetsService.getLast24HrsPercentChange(assetId),
+        ),
+      )
+
+      const alerts = responses
+        .map(({data}) => data)
+        .filter(assetMetrics => {
+          return (
+            Math.abs(
+              assetMetrics.market_data.percent_change_usd_last_24_hours,
+            ) >= 5
+          )
+        })
+        .map(assetMetrics => {
+          return `${assetMetrics.symbol}: ${utils.formatPercent(
+            assetMetrics.market_data.percent_change_usd_last_24_hours,
+          )}`
+        })
+
+      dispatch(
+        setAlerts({
+          alerts: alerts,
+        } as getAlertsProps),
+      )
+    } catch (err) {}
   }
 }

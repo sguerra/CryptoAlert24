@@ -1,5 +1,6 @@
 import {CaseReducer, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {
+  getAlertsProps,
   getAllAssetsProps,
   getAssetDetailProps,
   setWatchingAssetProps,
@@ -11,6 +12,7 @@ export type GlobalState = {
   assets: CryptoAsset[]
   asset: CryptoAsset | null
   watching: string[]
+  alerts: string[]
 }
 
 const initialState: GlobalState = {
@@ -18,6 +20,7 @@ const initialState: GlobalState = {
   assets: [],
   asset: null,
   watching: [],
+  alerts: [],
 }
 
 const getAllAssetsDef: CaseReducer<
@@ -56,6 +59,14 @@ const removeWatchingAssetDef: CaseReducer<
   state.watching = state.watching.filter(assetId => assetId !== payload.assetId)
 }
 
+const setAlertsDef: CaseReducer<GlobalState, PayloadAction<getAlertsProps>> = (
+  state,
+  {payload},
+) => {
+  const {alerts} = payload as getAlertsProps
+  state.alerts = alerts
+}
+
 export const globalSlice = createSlice({
   name: 'global',
   initialState: initialState,
@@ -64,6 +75,7 @@ export const globalSlice = createSlice({
     getAssetDetail: getAssetDetailDef,
     addWatchingAsset: addWatchingAssetDef,
     removeWatchingAsset: removeWatchingAssetDef,
+    setAlerts: setAlertsDef,
   },
 })
 
@@ -72,6 +84,7 @@ export const {
   getAssetDetail,
   addWatchingAsset,
   removeWatchingAsset,
+  setAlerts,
 } = globalSlice.actions
 
 export const selectAllAssets = (state: GlobalState) => state.assets
@@ -82,5 +95,6 @@ export const selectWatchingAssets = (state: GlobalState) =>
     previousValue.set(nextValue, nextValue)
     return previousValue
   }, new Map())
+export const selectAlerts = (state: GlobalState) => state.alerts
 
 export default globalSlice.reducer
