@@ -38,6 +38,12 @@ const getAssetDetailDef: CaseReducer<
 > = (state, {payload}) => {
   const {asset} = payload as getAssetDetailProps
   state.asset = asset
+  state.assets = state.assets.map(assetItem => {
+    if (assetItem.id === asset.id) {
+      return asset
+    }
+    return assetItem
+  })
 }
 
 const addWatchingAssetDef: CaseReducer<

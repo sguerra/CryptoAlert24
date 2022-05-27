@@ -104,8 +104,9 @@ export const getAlertsAsync = (assetIds: string[]) => {
         ),
       )
 
-      const alerts = responses
-        .map(({data}) => data)
+      const assetMetricsList = responses.map(({data}) => data)
+
+      const alerts = assetMetricsList
         .filter(assetMetrics => {
           return (
             Math.abs(

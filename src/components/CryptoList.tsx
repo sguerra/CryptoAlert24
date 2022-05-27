@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {ReactElement} from 'react'
 import type {FunctionComponent} from 'react'
 import {FlatList, StyleSheet} from 'react-native'
 import type {CryptoAsset} from '../services/types'
@@ -7,6 +7,7 @@ import {CryptoListItem} from './CryptoListItem'
 type CryptoListProps = {
   assets: CryptoAsset[]
   selectedAssets: Map<string, string>
+  ListEmptyComponent?: ReactElement
   onItemPressed: (id: string) => void
   onAddActionPressed: (id: string) => void
   onRemoveActionPressed: (id: string) => void
@@ -20,6 +21,7 @@ export const CryptoList: FunctionComponent<CryptoListProps> = ({
   onAddActionPressed,
   onRemoveActionPressed,
   onEndReached,
+  ListEmptyComponent = null,
 }) => {
   return (
     <FlatList
@@ -41,6 +43,7 @@ export const CryptoList: FunctionComponent<CryptoListProps> = ({
         )
       }}
       data={assets}
+      ListEmptyComponent={ListEmptyComponent}
     />
   )
 }

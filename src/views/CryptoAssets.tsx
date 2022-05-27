@@ -20,6 +20,7 @@ import {
 } from '../actions'
 import {CryptoLoading} from '../components/CryptoLoading'
 import {CryptoFilter, CryptoFilterEnum} from '../components/CryptoFilter'
+import {CryptoWatchlistEmpty} from '../components/CryptoWatchlistEmpty'
 
 function filterAssets(assetList: CryptoAsset[], assetFilter: string = '') {
   if (assetFilter === '') {
@@ -129,6 +130,7 @@ export const CryptoAssets: FunctionComponent = ({navigation}) => {
             onRemoveActionPressed={itemActionOnRemoveHandler}
             assets={filteredAssets}
             selectedAssets={watchingAssets}
+            ListEmptyComponent={<CryptoWatchlistEmpty />}
           />
         </>
       )}
