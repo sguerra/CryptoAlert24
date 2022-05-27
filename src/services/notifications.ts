@@ -1,6 +1,7 @@
 import DeviceInfo from 'react-native-device-info'
 import PushNotificationIOS from '@react-native-community/push-notification-ios'
 import {Alert} from 'react-native'
+import type {PushNotificationPermissions} from 'react-native'
 
 type NotificationPermissionsType = {
   alert: boolean
@@ -14,11 +15,21 @@ let notificationPermissions: NotificationPermissionsType = {
   sound: false,
 }
 
-PushNotificationIOS.requestPermissions().then(permissions => {
+function setNotificationPermissions(permissions: PushNotificationPermissions) {
   notificationPermissions = {
     alert: permissions.alert || false,
     badge: permissions.badge || false,
     sound: permissions.sound || false,
+  }
+}
+
+PushNotificationIOS.checkPermissions(permissions => {
+  if (permissions.alert || permissions.badge || permissions.sound) {
+    setNotificationPermissions(permissions)
+  } else {
+    PushNotificationIOS.requestPermissions().then(requetedPermissions =>
+      setNotificationPermissions(requetedPermissions),
+    )
   }
 })
 
