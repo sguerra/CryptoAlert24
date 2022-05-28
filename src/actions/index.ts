@@ -8,8 +8,10 @@ import {
   addWatchingAsset,
   removeWatchingAsset,
   setAlerts,
+  initWatchingAssets,
 } from '../reducers/globalReducer'
 import utils from '../components/utils'
+import {LocalStorage} from '../services/storage'
 
 const assetsService = new Assets()
 
@@ -64,6 +66,22 @@ export const getAssetDetailAsync = (assetId: string) => {
         } as getAssetDetailProps),
       )
     } catch (err) {}
+  }
+}
+
+export type initWatchingAssetsProps = {
+  watching: string[]
+}
+
+export const initWatchingAssetsAsync = () => {
+  return async (dispatch: Dispatch) => {
+    const watching = await LocalStorage.get('@watching')
+
+    dispatch(
+      initWatchingAssets({
+        watching: watching,
+      } as initWatchingAssetsProps),
+    )
   }
 }
 

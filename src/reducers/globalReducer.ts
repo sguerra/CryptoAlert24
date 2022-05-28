@@ -3,8 +3,10 @@ import {
   getAlertsProps,
   getAllAssetsProps,
   getAssetDetailProps,
+  initWatchingAssetsProps,
   setWatchingAssetProps,
 } from '../actions'
+import {LocalStorage} from '../services/storage'
 import {CryptoAsset} from '../services/types'
 
 export type GlobalState = {
@@ -46,17 +48,26 @@ const getAssetDetailDef: CaseReducer<
   })
 }
 
+const initWatchingAssetsDef: CaseReducer<
+  GlobalState,
+  PayloadAction<initWatchingAssetsProps>
+> = (state, {payload}) => {
+  state.watching = payload.watching
+}
+
 const addWatchingAssetDef: CaseReducer<
   GlobalState,
   PayloadAction<setWatchingAssetProps>
 > = (state, {payload}) => {
   state.watching.push(payload.assetId)
+  LocalStorage.set('@watching', state.watching)
 }
 const removeWatchingAssetDef: CaseReducer<
   GlobalState,
   PayloadAction<setWatchingAssetProps>
 > = (state, {payload}) => {
   state.watching = state.watching.filter(assetId => assetId !== payload.assetId)
+  LocalStorage.set('@watching', state.watching)
 }
 
 const setAlertsDef: CaseReducer<GlobalState, PayloadAction<getAlertsProps>> = (
@@ -73,6 +84,7 @@ export const globalSlice = createSlice({
   reducers: {
     getAllAssets: getAllAssetsDef,
     getAssetDetail: getAssetDetailDef,
+    initWatchingAssets: initWatchingAssetsDef,
     addWatchingAsset: addWatchingAssetDef,
     removeWatchingAsset: removeWatchingAssetDef,
     setAlerts: setAlertsDef,
@@ -82,6 +94,7 @@ export const globalSlice = createSlice({
 export const {
   getAllAssets,
   getAssetDetail,
+  initWatchingAssets,
   addWatchingAsset,
   removeWatchingAsset,
   setAlerts,

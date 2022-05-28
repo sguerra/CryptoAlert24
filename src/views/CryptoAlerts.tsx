@@ -7,7 +7,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import {useDispatch, useSelector} from 'react-redux'
 import {selectAlerts, selectWatchingAssets} from '../reducers/globalReducer'
 import {Notifications} from '../services/notifications'
-import {getAlertsAsync} from '../actions'
+import {getAlertsAsync, initWatchingAssetsAsync} from '../actions'
 
 const Stack = createNativeStackNavigator()
 
@@ -49,6 +49,10 @@ export const CryptoAlerts: FunctionComponent = ({}) => {
       clearInterval(interval)
     }
   }, [globalDispatch, watchingAssets])
+
+  useEffect(() => {
+    globalDispatch(initWatchingAssetsAsync())
+  }, [globalDispatch])
 
   return (
     <NavigationContainer>
