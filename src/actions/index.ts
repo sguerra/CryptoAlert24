@@ -76,10 +76,9 @@ export type initWatchingAssetsProps = {
 export const initWatchingAssetsAsync = () => {
   return async (dispatch: Dispatch) => {
     const watching = await LocalStorage.get('@watching')
-
     dispatch(
       initWatchingAssets({
-        watching: watching,
+        watching: watching || [],
       } as initWatchingAssetsProps),
     )
   }

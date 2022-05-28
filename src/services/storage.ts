@@ -9,7 +9,11 @@ export const LocalStorage = {
   get: async (key: string) => {
     try {
       const itemValue = await AsyncStorage.getItem(key)
-      return JSON.parse(itemValue || '{}')
+      if (itemValue) {
+        return JSON.parse(itemValue)
+      } else {
+        return null
+      }
     } catch (err) {
       return {}
     }
