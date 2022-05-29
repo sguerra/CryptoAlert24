@@ -2,9 +2,15 @@
 
 A react-native app to keep track of your favourite crypto coins.
 
+## Features
+
+- Search for asset information
+- Watch your favourite assets
+- Get alerts on +/- 5% price variation in the last 24hr
+
 ## Screenshots
 
-### Assets
+### Search
 
 <center>
     <img src="./media/assets.gif"/>
@@ -20,6 +26,12 @@ A react-native app to keep track of your favourite crypto coins.
 
 <center>
     <img src="./media/watchlist.gif"/>
+</center>
+
+### Alerts
+
+<center>
+    <img src="./media/alerts.gif"/>
 </center>
 
 ## Requirements

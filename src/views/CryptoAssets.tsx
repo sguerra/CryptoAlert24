@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react'
 import type {FunctionComponent} from 'react'
-import {View, Text, StyleSheet} from 'react-native'
+import {Text, StyleSheet, SafeAreaView, StatusBar} from 'react-native'
 import type {AnyAction} from 'redux'
 
 import {CryptoList} from '../components/CryptoList'
@@ -21,6 +21,7 @@ import {
 import {CryptoLoading} from '../components/CryptoLoading'
 import {CryptoFilter, CryptoFilterEnum} from '../components/CryptoFilter'
 import {CryptoWatchlistEmpty} from '../components/CryptoWatchlistEmpty'
+import {CryptoFooter} from '../components/CryptoFooter'
 
 function filterAssets(assetList: CryptoAsset[], assetFilter: string = '') {
   if (assetFilter === '') {
@@ -125,7 +126,8 @@ export const CryptoAssets: FunctionComponent = ({navigation}) => {
   }, [assets])
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle={'dark-content'} />
       <CryptoSearchInput onChangeText={searchTextHandler} />
 
       {!areAllAssetsLoaded && <CryptoLoading />}
@@ -148,12 +150,13 @@ export const CryptoAssets: FunctionComponent = ({navigation}) => {
           />
         </>
       )}
+      <CryptoFooter />
       <Debug>
         <Text>Render count: {count}</Text>
         <Text>List lenght: {assets?.length}</Text>
         <Text>List page: {page}</Text>
       </Debug>
-    </View>
+    </SafeAreaView>
   )
 }
 
@@ -163,7 +166,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'space-between',
     height: '100%',
-    backgroundColor: '#4d4d4d',
+    backgroundColor: '#444',
   },
   searchInput: {
     height: 50,

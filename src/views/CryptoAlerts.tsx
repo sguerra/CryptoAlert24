@@ -9,6 +9,8 @@ import {selectAlerts, selectWatchingAssets} from '../reducers/globalReducer'
 import {Notifications} from '../services/notifications'
 import {getAlertsAsync, initWatchingAssetsAsync} from '../actions'
 import Config from 'react-native-config'
+import {SafeAreaProvider} from 'react-native-safe-area-context'
+import type {NativeStackNavigationOptions} from '@react-navigation/native-stack'
 
 const Stack = createNativeStackNavigator()
 
@@ -30,7 +32,7 @@ export const CryptoAlerts: FunctionComponent = ({}) => {
 
     Notifications.pushNotification({
       id: 'id',
-      title: 'Crypto Alert',
+      title: 'CryptoAlert 24',
       body: body,
     })
   }, [alerts])
@@ -61,12 +63,26 @@ export const CryptoAlerts: FunctionComponent = ({}) => {
     globalDispatch(initWatchingAssetsAsync())
   }, [globalDispatch])
 
+  const screenOptions: NativeStackNavigationOptions = {
+    headerStyle: {
+      backgroundColor: '#222',
+    },
+    headerTitleStyle: {
+      color: 'white',
+    },
+    headerTitle: 'CryptoAlert 24',
+  }
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Assets" component={CryptoAssets} />
-        <Stack.Screen name="Details" component={CryptoDetails} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Assets"
+          screenOptions={screenOptions}>
+          <Stack.Screen name="Assets" component={CryptoAssets} />
+          <Stack.Screen name="Details" component={CryptoDetails} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   )
 }

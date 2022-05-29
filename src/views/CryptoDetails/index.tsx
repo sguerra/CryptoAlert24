@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useMemo} from 'react'
 import type {FunctionComponent} from 'react'
-import {StyleSheet, Text, View} from 'react-native'
+import {StyleSheet, Text, SafeAreaView, StatusBar} from 'react-native'
 
 import {Debug} from '../Debug'
 import {useDispatch, useSelector} from 'react-redux'
@@ -42,7 +42,8 @@ export const CryptoDetails: FunctionComponent = ({route}) => {
   }, [globalDispatch, assetId])
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle={'dark-content'} />
       {asset && asset?.id === assetId && (
         <>
           <CryptoDetailsHeader
@@ -57,7 +58,7 @@ export const CryptoDetails: FunctionComponent = ({route}) => {
       <Debug>
         <Text>Asset ID: {assetId}</Text>
       </Debug>
-    </View>
+    </SafeAreaView>
   )
 }
 
@@ -66,6 +67,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
-    backgroundColor: '#666',
+    backgroundColor: '#444',
   },
 })
