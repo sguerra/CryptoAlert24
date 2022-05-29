@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {selectAlerts, selectWatchingAssets} from '../reducers/globalReducer'
 import {Notifications} from '../services/notifications'
 import {getAlertsAsync, initWatchingAssetsAsync} from '../actions'
+import Config from 'react-native-config'
 
 const Stack = createNativeStackNavigator()
 
@@ -41,12 +42,18 @@ export const CryptoAlerts: FunctionComponent = ({}) => {
 
     const watchingAssetsArray = Array.from(watchingAssets.keys())
 
-    const interval = setInterval(() => {
+    let intervalInSeconds = 30
+
+    if (Config.API_REFRESH_RATE) {
+      intervalInSeconds = Number(Config.API_REFRESH_RATE)
+    }
+
+    const getAlertsInterval = setInterval(() => {
       globalDispatch(getAlertsAsync(watchingAssetsArray))
-    }, 60000)
+    }, intervalInSeconds * 1000)
 
     return () => {
-      clearInterval(interval)
+      clearInterval(getAlertsInterval)
     }
   }, [globalDispatch, watchingAssets])
 

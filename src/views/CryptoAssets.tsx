@@ -71,6 +71,7 @@ export const CryptoAssets: FunctionComponent = ({navigation}) => {
 
   const endOfListReachedHandler = useCallback(() => {
     if (selectedFilter === CryptoFilterEnum.All) {
+      setRefreshingList(true)
       globalDispatch(getAllAssetsAsync(page + 1) as unknown as AnyAction)
     }
   }, [globalDispatch, page, selectedFilter])
@@ -112,6 +113,17 @@ export const CryptoAssets: FunctionComponent = ({navigation}) => {
     globalDispatch(getAllAssetsAsync() as unknown as AnyAction)
   }, [globalDispatch])
 
+  const [refreshingList, setRefreshingList] = useState(false)
+
+  const onRefreshHandler = useCallback(() => {
+    setRefreshingList(true)
+    globalDispatch(getAllAssetsAsync())
+  }, [globalDispatch])
+
+  useEffect(() => {
+    setRefreshingList(false)
+  }, [assets])
+
   return (
     <View style={styles.container}>
       <CryptoSearchInput onChangeText={searchTextHandler} />
@@ -124,6 +136,8 @@ export const CryptoAssets: FunctionComponent = ({navigation}) => {
             onSelectionChange={onFilterSelectionChangeHandler}
           />
           <CryptoList
+            refreshing={refreshingList}
+            onRefresh={onRefreshHandler}
             onEndReached={endOfListReachedHandler}
             onItemPressed={itemOnPressHandler}
             onAddActionPressed={itemActionOnAddHandler}
