@@ -1,0 +1,75 @@
+{
+  "status": {
+    "elapsed": 1,
+    "timestamp": "2022-05-20T05:18:48.448527084Z"
+  },
+  "data": {
+    "id": "1e31218a-e44e-4285-820c-8282ee222035",
+    "slug": "bitcoin",
+    "symbol": "BTC",
+    "name": "Bitcoin",
+    "profile": {
+      "general": {
+        "overview": {
+          "is_verified": false,
+          "tagline": "A peer-to-peer electronic cash system",
+          "category": "Payments",
+          "sector": "Currencies",
+          "tags": "",
+          "project_details": "Bitcoin is the first <a href=\"https://messari.io/resource/distributed-systems\">distributed consensus-based</a>, censorship-resistant, permissionless, peer-to-peer payment settlement network with a provably scarce, programmable, native currency. Bitcoin (BTC), the native asset of the Bitcoin blockchain, is the world's first digital currency without a central bank or administrator. The Bitcoin network is an emergent decentralized monetary institution that exists through the interplay between <a href=\"https://messari.io/resource/node\">full nodes</a>, <a href=\"https://messari.io/resource/mining\">miners</a>, and developers. It is set by a social contract that is created and opted into by the users of the network and hardened through <a href=\"https://messari.io/c/resource/game-theory\">game theory</a> and <a href=\"https://messari.io/resource/cryptography\">cryptography</a>. Bitcoin is the first, oldest, and largest cryptocurrency in the world.",
+          "official_links": [
+            {
+              "name": "Whitepaper",
+              "link": "https://bitcoin.org/bitcoin.pdf"
+            },
+            {
+              "name": "Github",
+              "link": "https://github.com/bitcoin/bitcoin"
+            },
+            {
+              "name": "Twitter",
+              "link": "https://twitter.com/bitcoin"
+            },
+            {
+              "name": "Telegram",
+              "link": "http://t.me/bitcoin"
+            },
+            {
+              "name": "Reddit",
+              "link": "https://www.reddit.com/r/Bitcoin/"
+            }
+          ]
+        }
+      },
+      "technology": {
+        "overview": {
+          "technology_details": "\"Bitcoin\" is a label used for a protocol and a currency.\n\nBitcoin, the currency, is bits of data usable outside the limitations of the protocol using second-layer solutions like <a href=\"https://messari.io/resource/lightning-network\">Lightning Network</a> payment channels. \n\nBitcoin, the protocol, is a distributed, time-stamped ledger of <a href=\"https://messari.io/resource/utxo\">unspent transaction output</a> (UTXO) transfers stored in an append-only chain of 1MB data blocks. A network of mining and economic <a href=\"https://messari.io/resource/node\">nodes</a> maintains this ledger by validating, propagating, and fighting to include <a href=\"https://messari.io/resource/mempool\">mempool</a> transactions in new blocks. Economic nodes (aka \"full nodes\") receive transactions from other network participants, validate them against network consensus rules and double-spend vectors, and propagate the transactions to other full nodes that also validate and propagate. Valid transactions are sent to the network's mempool waiting for mining nodes to confirm them via inclusion in the next block.\n\nMining nodes work to empty the mempool usually in a highest-to-lowest fee order by picking transactions to include in the next block and racing against each other to generate a hash less than the target number set by Bitcoin's difficulty adjustment algorithm. Bitcoin uses a Proof-of-Work (PoW) consensus mechanism to establish the chain of blocks with the most accumulated “work” (a.k.a., energy spent on solved hashes) as the valid chain. Other network peers can cheaply verify the chain’s work.\n\nMining difficulty regularly adjusts to maintain Bitcoin's average ten-minute block schedule. Mining nodes add new blocks to whatever chain has the largest accumulated proof of work maintained by a network of economic nodes with downloaded copies of the same chain.\n\nLearn More:\nBitcoin Developer's Guide\nMastering Bitcoin",
+          "client_repositories": [
+            {
+              "name": "Bitcoin Core Repository",
+              "link": "https://github.com/bitcoin/bitcoin",
+              "license_type": "MIT License"
+            }
+          ]
+        },
+        "security": {
+          "audits": [],
+          "known_exploits_and_vulnerabilities": [
+            {
+              "title": "Value Overflow Incident",
+              "date": "2010-08-06T04:00:00Z",
+              "type": "Inflation",
+              "details": "On 6 August 2010, a major vulnerability in the bitcoin protocol was spotted. Transactions weren't properly verified before they were included in the transaction log or blockchain, which let users bypass bitcoin's economic restrictions and create an indefinite number of bitcoins. On 15 August, the vulnerability was exploited; over 184 billion bitcoins were generated in a transaction and sent to two addresses on the network. Within hours, the transaction was spotted and erased from the transaction log after the bug was fixed and the network forked to an updated version of the bitcoin protocol. This was the only major security flaw found and exploited in bitcoin's history."
+            },
+            {
+              "title": "Denial of Service Vulnerability",
+              "date": "2018-09-20T04:00:00Z",
+              "type": "Inflation",
+              "details": "On September 17, Bitcoin Core developers discovered that older versions of Bitcoin Core will crash if they try to process a block containing a transaction that attempts to spend the same input twice. Such blocks are invalid, so they can only be created by a miner willing to sacrifice their allowed income for creating a block of at least 12.5 BTC (about $80,000 USD as of this writing). \n\nSoon after discovering the DDoS attack vulnerability, Bitcoin Core developers also discovered an inflation bug which they quickly determined had the same root cause and fix. They decided to disclose the DDoS vulnerability immediately while keeping the inflation bug quiet. This provided developers time to reach out to miners, businesses, and other affected systems about upgrading their software, while also providing additional time to fix the exploit.\n\nhttps://bitcoincore.org/en/2018/09/18/release-0.16.3/\nhttps://bitcoincore.org/en/2018/09/20/notice/"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

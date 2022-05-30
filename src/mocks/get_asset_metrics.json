@@ -1,0 +1,70 @@
+{
+  "status": {
+    "elapsed": 1,
+    "timestamp": "2022-05-20T05:14:06.037370754Z"
+  },
+  "data": {
+    "id": "1e31218a-e44e-4285-820c-8282ee222035",
+    "slug": "bitcoin",
+    "symbol": "BTC",
+    "name": "Bitcoin",
+    "market_data": {
+      "price_usd": 30029.36858504339,
+      "price_btc": 1,
+      "price_eth": 14.899435449038785,
+      "volume_last_24_hours": 4576764842.505593,
+      "real_volume_last_24_hours": 2990409493.8034544,
+      "volume_last_24_hours_overstatement_multiple": 1.530480976598452,
+      "percent_change_usd_last_1_hour": -0.459067620885197,
+      "percent_change_btc_last_1_hour": 0,
+      "percent_change_eth_last_1_hour": 0.08509199902798976,
+      "percent_change_usd_last_24_hours": 3.3124753329235306,
+      "percent_change_btc_last_24_hours": -0.031916773818703045,
+      "percent_change_eth_last_24_hours": -0.2599175425878728,
+      "ohlcv_last_1_hour": {
+        "open": 30167.829418325364,
+        "high": 30176.050573807068,
+        "low": 30166.583585125056,
+        "close": 30167.859459737196,
+        "volume": 910230.0193537435
+      },
+      "ohlcv_last_24_hour": {
+        "open": 29055.908040867176,
+        "high": 29161.99350661387,
+        "low": 29024.97670215004,
+        "close": 29066.54640523714,
+        "volume": 35055508.89099818
+      },
+      "last_trade_at": "2022-05-20T05:14:05Z"
+    },
+    "marketcap": {
+      "rank": 1,
+      "marketcap_dominance_percent": 44.735637408094206,
+      "current_marketcap_usd": 572190724794.4124,
+      "y_2050_marketcap_usd": 630563905164.847,
+      "y_plus10_marketcap_usd": 621487971396.8038,
+      "liquid_marketcap_usd": 572221705039.9484,
+      "volume_turnover_last_24_hours_percent": 0.5224887103301679,
+      "realized_marketcap_usd": 454730316493.46545,
+      "outstanding_marketcap_usd": 547903613073.46497
+    },
+    "supply": {
+      "y_2050": 20986335.65,
+      "y_plus10": 20684271.75,
+      "liquid": 19044599.08,
+      "circulating": 19043568,
+      "y_2050_issued_percent": 90.74761500824467,
+      "annual_inflation_percent": 1.7650894019240386,
+      "stock_to_flow": 56.654354102967716,
+      "y_plus10_issued_percent": 92.0728527945394,
+      "supply_revived_90d": 19043460.92928903
+    },
+    "all_time_high": {
+      "price": 68721.93482129039,
+      "at": "2021-11-10T14:00:00Z",
+      "days_since": 34,
+      "percent_down": 31.129753778232587,
+      "breakeven_multiple": 1.4520058441201504
+    }
+  }
+}
