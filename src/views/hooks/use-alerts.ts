@@ -1,10 +1,12 @@
 import {useEffect} from 'react'
-import Config from 'react-native-config'
 import {useDispatch, useSelector} from 'react-redux'
+
+import {Config} from '../../services/config'
 import {getAlertsAsync, initWatchingAssetsAsync} from '../../actions'
 import {Translations} from '../../constants'
 import {selectAlerts, selectWatchingAssets} from '../../reducers/globalReducer'
 import {Notifications} from '../../services/notifications'
+import {AnyAction} from 'redux'
 
 export function useAlerts() {
   const watchingAssets = useSelector(selectWatchingAssets)
@@ -38,16 +40,12 @@ export function useAlerts() {
 
     const watchingAssetsArray = Array.from(watchingAssets.keys())
 
-    let intervalInSeconds = 30
-
-    if (Config.API_REFRESH_RATE) {
-      intervalInSeconds = Number(Config.API_REFRESH_RATE) || intervalInSeconds
-    }
-
-    intervalInSeconds = intervalInSeconds * 1000
+    const intervalInSeconds = Config.API_REFRESH_RATE * 1000
 
     const getAlertsInterval = setInterval(() => {
-      globalDispatch(getAlertsAsync(watchingAssetsArray))
+      globalDispatch(
+        getAlertsAsync(watchingAssetsArray) as unknown as AnyAction,
+      )
     }, intervalInSeconds)
 
     return () => {
@@ -57,6 +55,6 @@ export function useAlerts() {
 
   // Initialize watching alerts
   useEffect(() => {
-    globalDispatch(initWatchingAssetsAsync())
+    globalDispatch(initWatchingAssetsAsync() as unknown as AnyAction)
   }, [globalDispatch])
 }

@@ -1,4 +1,4 @@
-import Config from 'react-native-config'
+import {Config} from '../services/config'
 
 const priceFormatter = Intl.NumberFormat('en-US', {
   style: 'currency',

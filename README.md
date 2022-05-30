@@ -1,38 +1,46 @@
-# CryptoTracker
+# CryptoAlert24
 
-A react-native app to keep track of your favourite crypto coins.
+An app to keep track of changes in the price of your favourite crypto coins in the last 24hrs
 
 ## Features
 
-- Search for asset information
-- Watch your favourite assets
-- Get alerts on +/- 5% price variation in the last 24hr
+- Search for crypto coin information from an extensive catalog available online
+- Take a look of the profile information of all available coins
+- Watch your favourite assets for keeping track of them easily
+- Get alerts on changes of the price of your watched assets in the last 24hr (Custom percent threshold)
 
 ## Screenshots
 
-### Search
+### Search for assets
 
 <center>
     <img src="./media/assets.gif"/>
 </center>
 
-### Detail
+### Check an asset details
 
 <center>
     <img src="./media/detail.gif"/>
 </center>
 
-### Watchlist
+### Add asset to watchlist / Remove asset from watchlist
 
 <center>
     <img src="./media/watchlist.gif"/>
 </center>
 
-### Alerts
+### Get alerts on price percent variation
 
 <center>
     <img src="./media/alerts.gif"/>
 </center>
+
+## Technologies
+
+- [React Native](https://reactnative.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Messari's Crypto Data API](https://messari.io/api)
+- [Redux](https://es.redux.js.org/)
 
 ## Requirements
 
@@ -41,8 +49,8 @@ A react-native app to keep track of your favourite crypto coins.
 ## Installation
 
 ```bash
-git clone git@github.com:sguerra/CryptoTracker.git
-cd CryptoTracker
+git clone git@github.com:sguerra/CryptoAlert24.git
+cd CryptoAlert24
 npm install
 ```
 
@@ -55,7 +63,35 @@ npm install
 
 ## How to run? (ios)
 
+### Config
+
+Rename `.env.sample` to `.env` and set the next values:
+
+```
+# APP_MODE: 'prod'|'dev' - Application Mode
+APP_MODE='prod'
+APP_PRICE_THRESHOLD=5
+# API env vars
+API_BASE_URI='https://data.messari.io/api'
+API_IMG_URI='https://messari.io/asset-images'
+API_KEY='f126939c-9ffd-4741-b6de-ca414f2e3b57'
+# API refresh rate (in seconds)
+API_REFRESH_RATE=30
+```
+
+### Run
+
 ```bash
 npx react-native start
 npx react-native run-ios
 ```
+
+## Future work
+
+- Get information from own server
+  - Caching information
+  - Websocket price refresh
+- Native background actions
+  - Background Fetch
+  - Notifications when app is closed
+- Publish on store

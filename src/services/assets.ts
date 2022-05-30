@@ -1,4 +1,4 @@
-import Config from 'react-native-config'
+import {Config} from '../services/config'
 import get_all_assets_pages from '../mocks/get_all_assets_pages.json'
 import get_all_assets_not_found from '../mocks/get_all_assets_not_found.json'
 import get_asset_profile from '../mocks/get_asset_profile.json'
@@ -6,6 +6,7 @@ import get_asset_metrics from '../mocks/get_asset_metrics.json'
 import get_price_history from '../mocks/get_price_history.json'
 import type {
   CryptoAssetCollectionResponse,
+  CryptoAssetErrorResponse,
   CryptoAssetMetricsResponse,
   CryptoAssetPriceTimeseriesResponse,
   CryptoAssetResponse,
@@ -44,7 +45,10 @@ export default class Assets {
           return asset && isAssetInCurrentPage
         })
       } else {
-        return Promise.reject(get_all_assets_not_found)
+        return Promise.reject(
+          (get_all_assets_not_found as CryptoAssetErrorResponse).status
+            .error_message,
+        )
       }
 
       return Promise.resolve(
@@ -59,15 +63,17 @@ export default class Assets {
         const jsonResponse = await response.json()
 
         if (response.status !== 200) {
-          throw new Error((jsonResponse as CryptoErrorStatus).error_message)
+          return Promise.reject(
+            (jsonResponse as CryptoErrorStatus).error_message,
+          )
         }
 
         return jsonResponse
       } catch (errorMessage: unknown) {
-        throw new Error(errorMessage as string)
+        return Promise.reject(errorMessage as string)
       }
     } else {
-      throw new Error('APP_MODE is not configured in .env file')
+      return Promise.reject('APP_MODE is not configured in .env file')
     }
   }
 

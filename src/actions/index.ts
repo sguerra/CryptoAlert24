@@ -13,6 +13,7 @@ import {
 import utils from '../components/utils'
 import {LocalStorage} from '../services/storage'
 import {Alert} from 'react-native'
+import {Config} from '../services/config'
 
 const assetsService = new Assets()
 
@@ -131,7 +132,7 @@ export const getAlertsAsync = (assetIds: string[]) => {
           return (
             Math.abs(
               assetMetrics.market_data.percent_change_usd_last_24_hours,
-            ) >= 5
+            ) >= Config.APP_PRICE_THRESHOLD
           )
         })
         .map(assetMetrics => {
