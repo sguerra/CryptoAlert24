@@ -5,7 +5,7 @@ import {StyleSheet, Text, View} from 'react-native'
 import type {CryptoAsset} from '../services/types'
 import utils from './utils'
 import {useMarketData} from './hooks/useMarketData'
-import {PriceDeltaColors} from '../constants'
+import {Colors} from '../constants'
 
 type CryptoPriceDeltaProps = {
   asset: CryptoAsset
@@ -44,10 +44,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   priceDeltaInc: {
-    backgroundColor: PriceDeltaColors.INC,
+    backgroundColor: Colors.PriceDelta.INC,
   },
   priceDeltaDec: {
-    backgroundColor: PriceDeltaColors.DEC,
+    backgroundColor: Colors.PriceDelta.DEC,
   },
   priceDeltaPercent: {
     color: 'white',

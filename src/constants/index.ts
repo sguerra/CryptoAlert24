@@ -1,4 +1,2 @@
-export const PriceDeltaColors = {
-  INC: '#36c252',
-  DEC: '#e04638',
-}
+export {Colors} from './colors'
+export {Translations} from './translations'

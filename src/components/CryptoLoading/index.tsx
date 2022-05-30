@@ -1,13 +1,14 @@
 import React from 'react'
 import type {FunctionComponent} from 'react'
 import {ActivityIndicator, StyleSheet, Text, View} from 'react-native'
+import {Translations} from '../../constants'
 
 export const CryptoLoading: FunctionComponent = () => {
   return (
     <View style={styles.loading}>
       <View style={styles.center}>
         <ActivityIndicator size="large" color="white" />
-        <Text style={styles.loadingText}>Loading</Text>
+        <Text style={styles.loadingText}>{Translations.appLoading}</Text>
       </View>
     </View>
   )
