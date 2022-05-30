@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import type {FunctionComponent} from 'react'
 import {View, StyleSheet} from 'react-native'
 import HTML from 'react-native-render-html'
@@ -11,8 +11,8 @@ export const CryptoFooter: FunctionComponent = () => {
 
   const htmlFooter = `Created by ${htmlGithubLink} using ${htmlAPILink} API`
 
-  return (
-    <View style={styles.footer}>
+  const MemoizedHTML = useMemo(() => {
+    return (
       <HTML
         source={{html: htmlFooter}}
         baseStyle={styles.footerHTML}
@@ -21,8 +21,10 @@ export const CryptoFooter: FunctionComponent = () => {
         }}
         contentWidth={0}
       />
-    </View>
-  )
+    )
+  }, [htmlFooter])
+
+  return <View style={styles.footer}>{MemoizedHTML}</View>
 }
 
 const styles = StyleSheet.create({

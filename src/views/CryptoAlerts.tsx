@@ -32,7 +32,7 @@ export const CryptoAlerts: FunctionComponent = ({}) => {
 
     Notifications.pushNotification({
       id: 'id',
-      title: 'CryptoAlert 24',
+      title: 'CryptoAlert24',
       body: body,
     })
   }, [alerts])
@@ -73,7 +73,7 @@ export const CryptoAlerts: FunctionComponent = ({}) => {
       color: 'white',
       fontWeight: 'bold',
     },
-    headerTitle: 'CryptoAlert 24',
+    headerTitle: 'CryptoAlert24',
   }
 
   return (

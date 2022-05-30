@@ -9,6 +9,7 @@ import type {
   CryptoAssetMetricsResponse,
   CryptoAssetPriceTimeseriesResponse,
   CryptoAssetResponse,
+  CryptoErrorStatus,
 } from './types'
 import Utils from '../components/utils'
 
@@ -54,9 +55,16 @@ export default class Assets {
         const response = await makeAPIRequest(
           `/v2/assets?limit=100&page=${page}`,
         )
-        return response.json()
-      } catch (err) {
-        return Promise.reject(err)
+
+        const jsonResponse = await response.json()
+
+        if (response.status !== 200) {
+          throw new Error((jsonResponse as CryptoErrorStatus).error_message)
+        }
+
+        return jsonResponse
+      } catch (errorMessage: unknown) {
+        throw new Error(errorMessage as string)
       }
     } else {
       throw new Error('APP_MODE is not configured in .env file')

@@ -64,6 +64,16 @@ export const CryptoDetailsChart: FunctionComponent<CryptoDetailsChartProps> = ({
     ...styles.chartOHLVText,
   }
 
+  const MemoizedRenderHTML = useMemo(() => {
+    return (
+      <RenderHtml
+        contentWidth={0}
+        baseStyle={chartDetailsTextStyle}
+        source={{html: asset.profile.general.overview.project_details}}
+      />
+    )
+  }, [asset])
+
   return (
     <ScrollView style={styles.chart}>
       <View style={styles.chartInterval}>
@@ -113,11 +123,7 @@ export const CryptoDetailsChart: FunctionComponent<CryptoDetailsChartProps> = ({
         <Text style={chartDetailsValueStyle}>
           {asset.profile.general.overview.tagline}
         </Text>
-        <RenderHtml
-          contentWidth={0}
-          baseStyle={chartDetailsTextStyle}
-          source={{html: asset.profile.general.overview.project_details}}
-        />
+        {MemoizedRenderHTML}
       </View>
     </ScrollView>
   )

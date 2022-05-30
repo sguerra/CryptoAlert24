@@ -12,6 +12,7 @@ import {
 } from '../reducers/globalReducer'
 import utils from '../components/utils'
 import {LocalStorage} from '../services/storage'
+import {Alert} from 'react-native'
 
 const assetsService = new Assets()
 
@@ -39,7 +40,9 @@ export const getAllAssetsAsync = (nextPage: number = 1) => {
           page: nextPage,
         } as getAllAssetsProps),
       )
-    } catch (err) {}
+    } catch (errorMessage: unknown) {
+      Alert.alert(errorMessage as string)
+    }
   }
 }
 

@@ -151,15 +151,33 @@ export type CryptoAsset = CryptoCommon & {
 
 export type CryptoAssetResponse = {
   data: CryptoAsset
+  status: CryptoStatus
 }
 export type CryptoAssetMetricsResponse = {
   data: CryptoAssetMetrics
+  status: CryptoStatus
 }
 
 export type CryptoAssetPriceTimeseriesResponse = {
   data: CryptoAssetPriceTimeseries
+  status: CryptoStatus
 }
 
 export type CryptoAssetCollectionResponse = {
   data: CryptoAsset[]
+  status: CryptoStatus
+}
+
+export type CryptoAssetErrorResponse = {
+  status: CryptoErrorStatus
+}
+
+export type CryptoStatus = {
+  timestamp: string
+  elapsed: number
+}
+
+export type CryptoErrorStatus = CryptoStatus & {
+  error_code: number
+  error_message: string
 }
