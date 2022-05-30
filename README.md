@@ -2,6 +2,10 @@
 
 An app to keep track of changes in the price of your favourite crypto coins in the last 24hrs
 
+<center>
+    <img src="./media/logo.png" width="250"/>
+</center>
+
 ## Features
 
 - Search for crypto coin information from an extensive catalog available online
