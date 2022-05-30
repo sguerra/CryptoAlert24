@@ -47,12 +47,14 @@ export const CryptoAlerts: FunctionComponent = ({}) => {
     let intervalInSeconds = 30
 
     if (Config.API_REFRESH_RATE) {
-      intervalInSeconds = Number(Config.API_REFRESH_RATE)
+      intervalInSeconds = Number(Config.API_REFRESH_RATE) || intervalInSeconds
     }
+
+    intervalInSeconds = intervalInSeconds * 1000
 
     const getAlertsInterval = setInterval(() => {
       globalDispatch(getAlertsAsync(watchingAssetsArray))
-    }, intervalInSeconds * 1000)
+    }, intervalInSeconds)
 
     return () => {
       clearInterval(getAlertsInterval)
@@ -69,6 +71,7 @@ export const CryptoAlerts: FunctionComponent = ({}) => {
     },
     headerTitleStyle: {
       color: 'white',
+      fontWeight: 'bold',
     },
     headerTitle: 'CryptoAlert 24',
   }

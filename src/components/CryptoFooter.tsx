@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   footerLink: {
-    color: '#999',
+    color: '#e3b828',
     textDecorationLine: 'none',
   },
 })
