@@ -13,6 +13,13 @@ An app to keep track of changes in the price of your favourite crypto coins in t
 - Watch your favourite assets for keeping track of them easily
 - Get alerts on changes of the price of your watched assets in the last 24hr (Custom percent threshold)
 
+## Technologies
+
+[![React Native](https://img.shields.io/badge/-react%20native-grey?style=for-the-badge&logo=react)](https://reactnative.dev/)
+[![TypeScript](https://img.shields.io/badge/typescript-white?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![Redux](https://img.shields.io/badge/redux-764abc?style=for-the-badge&logo=redux)](https://es.redux.js.org/)
+[![Messari's Crypto Data API](https://img.shields.io/badge/messari%20api-435a6f?style=for-the-badge&logo=api)](https://messari.io/api)
+
 ## Screenshots
 
 ### Search for assets
@@ -38,13 +45,6 @@ An app to keep track of changes in the price of your favourite crypto coins in t
 <center>
     <img src="./media/alerts.gif"/>
 </center>
-
-## Technologies
-
-- [React Native](https://reactnative.dev/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Messari's Crypto Data API](https://messari.io/api)
-- [Redux](https://es.redux.js.org/)
 
 ## Requirements
 
@@ -93,8 +93,8 @@ npx react-native run-ios
 ## Future work
 
 - Testing
-  - Unit test
-  - Beta testing with Testflight
+  - Unit tests
+  - Beta testing with [TestFlight](https://developer.apple.com/testflight/)
 - Improved Charts
 - Get information from own server
   - Caching information
