@@ -92,6 +92,10 @@ npx react-native run-ios
 
 ## Future work
 
+- Testing
+  - Unit test
+  - Beta testing with Testflight
+- Improved Charts
 - Get information from own server
   - Caching information
   - Websocket price refresh
